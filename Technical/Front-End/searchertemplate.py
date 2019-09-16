@@ -24,34 +24,40 @@ class Ui_MainWindow(object):
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.comboBox = QtWidgets.QComboBox(self.centralwidget)
-        self.comboBox.setGeometry(QtCore.QRect(20, 30, 111, 22))
+        self.comboBox.setGeometry(QtCore.QRect(90, 30, 111, 22))
         self.comboBox.setObjectName("comboBox")
         self.pushButton = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton.setGeometry(QtCore.QRect(140, 70, 75, 23))
+        self.pushButton.setGeometry(QtCore.QRect(210, 30, 75, 23))
         self.pushButton.setObjectName("pushButton")
         self.pushButton_2 = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton_2.setGeometry(QtCore.QRect(240, 30, 75, 23))
+        self.pushButton_2.setGeometry(QtCore.QRect(210, 100, 75, 23))
         self.pushButton_2.setObjectName("pushButton_2")
         self.lineEdit_2 = QtWidgets.QLineEdit(self.centralwidget)
-        self.lineEdit_2.setGeometry(QtCore.QRect(460, 30, 113, 20))
+        self.lineEdit_2.setGeometry(QtCore.QRect(90, 100, 113, 20))
         self.lineEdit_2.setObjectName("lineEdit_2")
         self.lineEdit_2.setToolTip("Enter one or more comma separated values")
         self.comboBox_2 = QtWidgets.QComboBox(self.centralwidget)
-        self.comboBox_2.setGeometry(QtCore.QRect(330, 30, 111, 22))
+        self.comboBox_2.setGeometry(QtCore.QRect(90, 70, 111, 22))
         self.comboBox_2.setObjectName("comboBox_2")
         self.label = QtWidgets.QLabel(self.centralwidget)
-        self.label.setGeometry(QtCore.QRect(20, 10, 47, 13))
+        self.label.setGeometry(QtCore.QRect(20, 30, 47, 13))
         self.label.setObjectName("label")
         self.tableWidget = QtWidgets.QTableWidget(self.centralwidget)
-        self.tableWidget.setGeometry(QtCore.QRect(20, 110, 1061, 761))
+        self.tableWidget.setGeometry(QtCore.QRect(10, 140, 1071, 731))
         self.tableWidget.setObjectName("tableWidget")
         self.radioButton = QtWidgets.QRadioButton(self.centralwidget)
-        self.radioButton.setGeometry(QtCore.QRect(20, 60, 82, 17))
+        self.radioButton.setGeometry(QtCore.QRect(210, 60, 82, 17))
         self.radioButton.setObjectName("radioButton")
         self.radioButton.setChecked(True)
         self.radioButton_2 = QtWidgets.QRadioButton(self.centralwidget)
-        self.radioButton_2.setGeometry(QtCore.QRect(20, 80, 82, 17))
+        self.radioButton_2.setGeometry(QtCore.QRect(210, 80, 82, 17))
         self.radioButton_2.setObjectName("radioButton_2")
+        self.label_2 = QtWidgets.QLabel(self.centralwidget)
+        self.label_2.setGeometry(QtCore.QRect(20, 70, 61, 16))
+        self.label_2.setObjectName("label_2")
+        self.label_3 = QtWidgets.QLabel(self.centralwidget)
+        self.label_3.setGeometry(QtCore.QRect(50, 100, 21, 16))
+        self.label_3.setObjectName("label_3")
         #self.radioButton_2.setChecked(True)
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
@@ -78,6 +84,8 @@ class Ui_MainWindow(object):
         self.label.setText(_translate("MainWindow", "SORT BY"))
         self.radioButton.setText(_translate("MainWindow", "ASCENDING"))
         self.radioButton_2.setText(_translate("MainWindow", "DESCENDING"))
+        self.label_2.setText(_translate("MainWindow", "SEARCH IN"))
+        self.label_3.setText(_translate("MainWindow", "FOR"))
     
     def cell_was_clicked(self, row, column):
         print("Row %d and Column %d was clicked" % (row, column))
@@ -223,11 +231,11 @@ class Ui_MainWindow(object):
         csv_data = searcher.get_csv_data(sys.argv[1])
         searchField = str(self.getSearchField2(self.comboBox_2))
         searchString = str(self.getSearchString(self.lineEdit_2))
-        
+        sortOrder = str(self.checkSortType())
         #sortOrder = str(self.checkSortType())
         #print(sortField)
         #print(sortOrder)
-        test = searcher.display_search(csv_data,searchString.strip(),searchField.strip())
+        test = searcher.display_search(csv_data,searchString.strip(),searchField.strip(),sortOrder)
         print(test)
         data2 = {}
         fields = test[0]
@@ -243,17 +251,18 @@ class Ui_MainWindow(object):
                     col_vals.append(str(col_temp))
                     
             data2[key] = col_vals
-            #print(col_vals)
             
-                
-        num_records = len(data2)        
+            
+        data1 = data2        
+        num_records = len(data1['filepath'])  
+        #print(num_records)
             
         self.tableWidget.setRowCount(num_records)
         self.tableWidget.setColumnCount(num_cols)
-        data1 = data2
+        
         #self.data = ""
         self.data = data1
-
+        #print(len(data1['filepath']))
         
         
         horHeaders = []

@@ -146,9 +146,10 @@ def display_all(data):
     connection.close()
     return output
 
-def display_search(data, searchString, searchField):
+def display_search(data, searchString, searchField, sortType):
     rows = []
     fields = data[0]
+    print(type(searchString))
     for index, x in enumerate(data):
         temp = data[index]
         if (index > 0):
@@ -210,6 +211,22 @@ def display_search(data, searchString, searchField):
     #searchStr ="SELECT * FROM filerecords "+"WHERE "+searchField+" LIKE %"+searchString+"%"    
     #print(searchStr)
     tempList = searchString.split(",")
+    print(tempList)
+    query_str = "SELECT * FROM filerecords WHERE "
+    
+    for i in tempList:
+        if i == tempList[-1]:
+            temp = "'"+"%"+i.strip()+"%"+"'"
+            query_str = query_str+searchField+" LIKE "+temp
+            #print(temp)
+        else:
+           temp = "'"+"%"+i.strip()+"%"+"'"
+           #print(temp)
+           query_str = query_str+searchField+" LIKE "+temp+" OR "
+    query_str = query_str+" ORDER BY "+searchField+" "+sortType
+    print(query_str)
+    crsr.execute(query_str)
+    """
     searchString = "("
     for i in tempList:
         if i == tempList[-1]:
@@ -221,6 +238,7 @@ def display_search(data, searchString, searchField):
             
     print("SELECT * FROM filerecords "+"WHERE "+searchField+" IN "+searchString)    
     crsr.execute("SELECT * FROM filerecords "+"WHERE "+searchField+" IN "+searchString)
+    """
     output = crsr.fetchall()
     
     #testing output
@@ -317,7 +335,7 @@ def display_sorted(data,field,sortType):
 csv_data = get_csv_data(sys.argv[1])
 #print(csv_data)
 #print(data)   
-testASC = display_sorted(csv_data, "size", "ASC")
-testDESC = display_sorted(csv_data, "size", "DESC")  
-testALL = display_all(csv_data)  
-#testSRCH = display_search(csv_data, "jesse", "author")  
+#testASC = display_sorted(csv_data, "size", "ASC")
+#testDESC = display_sorted(csv_data, "size", "DESC")  
+#testALL = display_all(csv_data)  
+testSRCH = display_search(csv_data, "jesse,jess", "author", "DESC")  
