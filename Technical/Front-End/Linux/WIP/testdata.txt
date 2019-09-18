@@ -1,0 +1,4 @@
+C:\Users\Jesse\Documents\CSC3600 ICT Professional Project.docx,size:48,createdate:14-08-2019,type:docx,author:jesse
+C:\Users\Jesse\Documents\IMG2019.pdf,size:48,createdate:14-08-2019,type:pdf,author:jesse
+C:\Users\Jesse\Documents\temp.png,size:48,createdate:14-08-2019,type:png,author:jess
+C:\Users\Jesse\Documents\video.avi,size:48,createdate:14-08-2019,type:avi,length:42'32"
