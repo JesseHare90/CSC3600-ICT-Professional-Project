@@ -7,6 +7,8 @@ import os
 import sys
 # import required argparse module for smart argument parsing functionality
 import argparse
+# import required exiftool wrapper to metadata scraping functionality
+#import exiftool
 # import required CSV module for formating output
 import csv
 
@@ -20,15 +22,23 @@ import csv
 # Backend program developed by James and Richard
 # Frontend program developed by Jesse, Ryan and Vincent
 
-# TODO: Input verification
-# TODO: Command line argument number verification (EG: No more than 3 args)
+# ======================
+# TODO list
+# ======================
+
+# TODO: Find out how to use > symbol in command line arguments
 # TODO: Data structure for storing metadata before output to CSV
-# TODO: Hachoir-metadata class to scrape metadata from files found with os.walk
+# TODO: Use Pyexiftool wrapper to scrape metadata
 # TODO: CSV output function
+
+# ======================
+# Variable declarations
+# ======================
 
 module_name = "File metadata harvester and searcher"
 team_name = "The USQ Learning Emporium"
-__version__ = "0.0.1"
+__version__ = "0.0.4"
+global_array = []
 
 # ======================
 # Function declarations
@@ -37,33 +47,20 @@ __version__ = "0.0.1"
 # ----------------------------------------------------------------
 # Traverses all directories and files recursively
 # @param path - filename path passed in from command line argument
-# @return N/A
+# @return array of paths
 # ----------------------------------------------------------------
 def recursive(path):
-    # set the directory to begin from
-    #root = path
-    #for root, dirs, files in os.walk(root):
-    #    print('Found directory: %s' % root)
-    #    for fname in files:
-    #        print('\t%s' % fname)
     for root, dirs, files in os.walk(path):
         for index in files:
-            print(os.path.join(root, index))
-
+            global_array.append(os.path.join(root, index))
+    return global_array
 
 # ----------------------------------------------------------------
 # Traverses all directories and files non-recursively
 # @param path - filename path passed in from command line argument
-# @return N/A
+# @return array of paths
 # ----------------------------------------------------------------
 def non_recursive(path):
-    # set the directory to begin from
-    #root = path
-    # required to keep dirs and files as there could be both inside a root directory instead of just in subfolders etc...
-    #for root, dirs, files in os.walk(root):
-        #print(root)
-        #for dir in dirs:
-            #print(os.path.join(root, dir))
     folders = []
     files = []
 
@@ -79,42 +76,75 @@ def non_recursive(path):
 
 # ----------------------------------------------------------------
 # Outputs metadata into CSV
-# @param path -
-# @param path -
-# @param path -
+# @param output_csv - filename of the csv
+# @param global_array - array with stored metadata
 # @return N/A
 # ----------------------------------------------------------------
-#def csv_output(csv_file, csv_columns, data):
-#    try:
-#        with open(csv_file, 'w') as csvfile:
-#            writer = csv.DictWriter(csvfile, fielfnames=csv_columns)
-#            writer.writeheader()
-#            for data in dict_data:
-#                writer.writerow(data)
-#    except IOError as (errno, strerror):
-#        print("I/O error({0}): {1}".format(errno, strerror))
-#    return
+def csv_output(output_csv, global_array):
+    # Open/create the CSV file with writeable attributes
+    with open(output_csv, mode='w') as output:
+        # Create a writer object and set csv delimiter
+        output_writer = csv.writer(output, delimiter=',', quoting=csv.QUOTE_MINIMAL)
+        metadata = global_array
+        # Use writerow method function to add rows to csv file
+        #for count in range(0, len(metadata)):
+        output_writer.writerows(metadata)
+
+# ----------------------------------------------------------------
+# Populates array with metadata
+# @param path - filename path passed in from command line argument
+# @return N/A
+# ----------------------------------------------------------------
+#def populate(array):
+#    with exiftool.ExifTool() as et:
+#        metadata = et.get_metadata_batch(array)
+#    for d in metadata:
+
+
+
 
 # =============
 # Control Flow
 # =============
 
 def main():
+    # -------------------------------
+    # Phase 1 - Information Gathering
+    # -------------------------------
+
     # Initialise argument parsing functionality
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(description='File metadata harvester and searcher')
     # Add the recursive option
-    parser.add_argument('-r', '--recursive', action='store_true', help="allows program to recursively traverse through folders")
+    parser.add_argument('-r', '--recursive', action='store_true', help='allows program to recursively traverse through folders')
     # Add the file path option
-    parser.add_argument('file_path') # TODO: Add file path sanitisation/verification EG: No illegal characters
+    parser.add_argument('file_path', help='Input file path to be indexed')
+    # Add the output file path token ">"
+    parser.add_argument('-o', action='store_true', help='Token to signify output to subsequent csv file') # TODO: Need to figure out how to use > ... causes errors
+    # Add the output csv file name
+    parser.add_argument('output_file', help='Output CSV file')
     # Parse any given arguments
     args = parser.parse_args()
-
+    # Checks if the supplied argument is a valid file path
+    if not (os.path.isdir(args.file_path)):
+        print("Invalid File Path")
+        return
     if args.recursive:
         # if -r option is used call the recursive function
         recursive(args.file_path)
     if args.file_path:
         # if no -r option is used call the non_recursive function
         non_recursive(args.file_path)
+
+    # ---------------------------
+    # Phase 2 - Metadata Scraping
+    # ---------------------------
+
+    # ------------------------
+    # Phase 3 - Pushing output
+    # ------------------------
+
+    # Call the output function
+    csv_output(args.output_file, global_array)
 
 # Main control flow of program is started here, first function called is main
 if __name__ == '__main__':
