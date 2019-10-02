@@ -38,6 +38,9 @@ def RepresentsInt(s):
         return True
     except ValueError:
         return False
+    
+    
+
 # =======================================================================================================
 # Extract data from the csv file (output of mdextract companion program)
 # @param filepath - the path to the csv file
@@ -151,6 +154,7 @@ def display_all(data,connection):
     #connection.close()
     return output
 
+"""
 # =======================================================================================================
 # Perform a SELECT query against specified values for a selected field(metadata attr type/table column)
 # @param data - output of get_csv_data() function (SELECT * statement)
@@ -164,7 +168,7 @@ def display_search(data, searchString, searchField, sortType, connection):
     fields = data[0]
     crsr = connection.cursor()
     # perform a search on the db for any records whose specified fieldname contains one or more specified strings
-    tempList = searchString.split(",")
+    tempList = searchString.split(" ")
     print(tempList)
     query_str = "SELECT * FROM filerecords WHERE "
     for i in tempList:
@@ -181,7 +185,54 @@ def display_search(data, searchString, searchField, sortType, connection):
     output.insert(0,fields)
     #connection.close()
     return output
-
+"""
+# =======================================================================================================
+# Perform a SELECT query against specified values for a selected field(metadata attr type/table column)
+# @param data - output of get_csv_data() function (SELECT * statement)
+# @param searchString - one or more comma separated values as a string, used in WHERE fieldname LIKE searchString
+# @param searchField - the specified fieldname as a string
+# @param sortType - ASC or DESC as a string, specifies an Ascending or Descending order sort by fieldname
+# @param connection - the in-memory database
+# @return - results of query against the table
+# =======================================================================================================
+def display_search(data, searchString, searchField, sortType, connection):
+    fields = data[0]
+    crsr = connection.cursor()
+    # perform a search on the db for any records whose specified fieldname contains one or more specified strings
+    tempList = searchString.split(" ")
+    print(tempList)
+    query_str = "SELECT * FROM filerecords WHERE "
+    operators = ["AND","OR"]
+    for index, i in enumerate(tempList):
+        #if there is only one value supplied, just search for it alone
+        if len(tempList) == 1:
+           temp = "'"+"%"+i.strip()+"%"+"'"
+           query_str = query_str+searchField+" LIKE "+temp 
+           query_str = query_str+" ORDER BY "+searchField+" "+sortType
+           print(query_str)
+           crsr.execute(query_str)
+           output = crsr.fetchall()
+           output.insert(0,fields)
+           #connection.close()
+           return output
+        else:
+           value = tempList[index]
+           if value != tempList[-1]:
+               #if a value, not an operator
+               if value not in operators:
+                   nextOp = tempList[index+1]
+                   query_str = query_str+searchField+" LIKE '%"+value+"%' "+nextOp+" "
+           if value == tempList[-1]:
+               if value not in operators:
+                   query_str = query_str+searchField+" LIKE '%"+value+"%'"
+    query_str = query_str+" ORDER BY "+searchField+" "+sortType
+    print(query_str)
+    crsr.execute(query_str)
+    output = crsr.fetchall()
+    output.insert(0,fields)
+    #connection.close()
+    return output              
+                   
 # =======================================================================================================
 # Sorts all file metadata according to a specified field, in Ascending or Descending order
 # @param data - data collected from the csv file using get_csv_data function
@@ -274,6 +325,7 @@ class Ui_MainWindow(object):
         self.pushButton_2.clicked.connect(self.SearchTable)
         self.tableWidget.cellDoubleClicked.connect(self.cell_was_clicked)
         self.tableWidget.horizontalHeader().sectionClicked.connect(self.SortByHeader)
+        self.lineEdit_2.returnPressed.connect(self.SearchTable)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
         
         
@@ -454,27 +506,63 @@ class Ui_MainWindow(object):
         searchField = str(self.getSearchField2(self.comboBox_2))
         searchString = str(self.getSearchString(self.lineEdit_2))
         sortOrder = str(self.checkSortType())
-        
-        test = display_search(csv_data,searchString.strip(),searchField.strip(),sortOrder,self.conn)
-        self.createTable(test)
-        
+        if self.checkInput(self.lineEdit_2) == True:
+            test = display_search(csv_data,searchString.strip(),searchField.strip(),sortOrder,self.conn)
+            self.createTable(test)   
+        else:
+            error_dialog = QtWidgets.QErrorMessage()
+            error_dialog.showMessage('Incorrect format/ Invalid Input for Search Function: Please enter values separated by either \'AND\' or \'OR\'')
+            error_dialog.showMessage('woops')
     #========================================================================================================
     # Function that enables sorting of data by clicking on column headers, sorting by the particular field alternating in order
-    #
+    # @param column - the column of the Header Clicked
+    # @return - N/A
     #========================================================================================================
     def SortByHeader(self, column):
+        # get the value in the column header clicked (field name)
         colVal = self.tableWidget.horizontalHeaderItem(column).text()
+        # Perform a sort against the field name, DESC or ASC alternating for each click (by default is ASCENDING)
         if self.order == "DESC":
             csv_data = get_csv_data(sys.argv[1])
             self.createTable(display_sorted(csv_data,colVal,"DESC",self.conn))
-            self.order = "ASC"
-            
+            self.order = "ASC" 
         else:
             csv_data = get_csv_data(sys.argv[1])
             self.createTable(display_sorted(csv_data,colVal,"ASC",self.conn))
             self.order = "DESC"
-            
-            
+    
+    #========================================================================================================
+    # This Function will check as to whether the input is a valid string of search values, separated by the AND
+    # or OR operators
+    # @param lineEdit_2 - the widget from which the input is to be checked
+    # @return - True if the user supplied string is valid, false if not
+    #========================================================================================================            
+    def checkInput(self, lineEdit_2):
+          inputStr = self.lineEdit_2.text()
+          inputVals = inputStr.split()
+          print(inputVals)
+          # if the amount of values and operators is even, or there are none, return false
+          if (((len(inputVals) % 2) == 0) | (len(inputVals) == 0)):
+              return False
+          # if only one value is supplied it is valid (even if that value is OR or AND)
+          if len(inputVals) == 1:
+              return True
+          # otherwise, extract all values and operators from the string
+          # for input containing more than one element, every second element must be either OR or AND
+          #and the first, and every second afterward, must be a value
+          else:
+              vals = inputVals[::2]
+              #print(vals)
+              conds = inputVals[1::2]
+              #print(conds)
+              # now we just check if this is the case, if so, return true, otherwise return false
+              for i in conds:
+                  if (i.upper() != "OR" )&( i.upper() != "AND"):
+                      return False
+              for i in vals:
+                  if (i.upper() == "OR" )|(i.upper() == "AND"):
+                      return False
+          return True
             
             
 # ===========================================================================================================
