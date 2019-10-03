@@ -23,7 +23,7 @@ import sqlite3
 import os
 #==========================================================================================================
 """
-THE FOLLOWING FUNCTIONS ALL GATHER DATA FOR DISPLAY BY THE GUI
+THE FOLLOWING FUNCTIONS ALL GATHER DATA (OR HELP THE PROCESS) FOR DISPLAY BY THE GUI
 """
 #==========================================================================================================
 
@@ -39,8 +39,22 @@ def RepresentsInt(s):
     except ValueError:
         return False
     
+# =======================================================================================================
+# Tests whether a filename (as part of a csv file record) is actually valid and exists
+# @param filename - file (and path to) of file as string
+# @ return - True if the filepath is valid, false if not
+# =======================================================================================================    
+def isValidPath(filename):
+    #print(filename)
+    #emp = filename.replace('.', '\.')
+    #print("temp is"+temp)
+    if os.path.exists(filename):
+        #print(filename)
+        return True
+    else:
+        print("The filepath/file, "+"'"+filename+"' does not exist, or is an invalid path")
+        return False
     
-
 # =======================================================================================================
 # Extract data from the csv file (output of mdextract companion program)
 # @param filepath - the path to the csv file
@@ -49,6 +63,10 @@ def RepresentsInt(s):
 # =======================================================================================================
 
 def get_csv_data(filepath):
+    csvFileName, fileExt = os.path.splitext(filepath)
+    if fileExt != '.csv':
+        print('ERROR: expected a csv file, '+fileExt+" files are not usable as input")
+        raise SystemExit
     file = str(filepath)
     csv_data = open(file,"r")
     #use readlines() to build a list of the csv data, line by line
@@ -76,9 +94,14 @@ def get_csv_data(filepath):
         temprecord = i
         tempdict = {}
         for j in temprecord:
-            if (check == "true"):         
-                tempdict["filepath"] = temprecord[0]
-                check = "false"
+            if (check == "true"):
+                print(temprecord[0])
+                if isValidPath(temprecord[0]):
+                    tempdict["filepath"] = temprecord[0]
+                    check = "false"
+                else:
+                    print("ERROR: Incorrect formatting of csv file: Expected valid filepath where none was found")
+                    raise SystemExit
             else:
                 kv = j.split(":")
                 tempdict[kv[0]] = kv[1]
@@ -132,7 +155,8 @@ def create_connection(data):
                 else:
                     sql_insert_p2.append(temp[j].strip())    
             else:
-               sql_insert_p2.append("")      
+               sql_insert_p2.append("NULL")      
+        #print(sql_insert,sql_insert_p2)
         crsr.execute(sql_insert,sql_insert_p2)   
     connection.commit()
     return connection
@@ -154,38 +178,7 @@ def display_all(data,connection):
     #connection.close()
     return output
 
-"""
-# =======================================================================================================
-# Perform a SELECT query against specified values for a selected field(metadata attr type/table column)
-# @param data - output of get_csv_data() function (SELECT * statement)
-# @param searchString - one or more comma separated values as a string, used in WHERE fieldname LIKE searchString
-# @param searchField - the specified fieldname as a string
-# @param sortType - ASC or DESC as a string, specifies an Ascending or Descending order sort by fieldname
-# @param connection - the in-memory database
-# @return - results of query against the table
-# =======================================================================================================
-def display_search(data, searchString, searchField, sortType, connection):
-    fields = data[0]
-    crsr = connection.cursor()
-    # perform a search on the db for any records whose specified fieldname contains one or more specified strings
-    tempList = searchString.split(" ")
-    print(tempList)
-    query_str = "SELECT * FROM filerecords WHERE "
-    for i in tempList:
-        if i == tempList[-1]:
-            temp = "'"+"%"+i.strip()+"%"+"'"
-            query_str = query_str+searchField+" LIKE "+temp
-        else:
-           temp = "'"+"%"+i.strip()+"%"+"'"
-           query_str = query_str+searchField+" LIKE "+temp+" OR "
-    query_str = query_str+" ORDER BY "+searchField+" "+sortType
-    print(query_str)
-    crsr.execute(query_str)
-    output = crsr.fetchall()
-    output.insert(0,fields)
-    #connection.close()
-    return output
-"""
+
 # =======================================================================================================
 # Perform a SELECT query against specified values for a selected field(metadata attr type/table column)
 # @param data - output of get_csv_data() function (SELECT * statement)
@@ -206,25 +199,41 @@ def display_search(data, searchString, searchField, sortType, connection):
     for index, i in enumerate(tempList):
         #if there is only one value supplied, just search for it alone
         if len(tempList) == 1:
-           temp = "'"+"%"+i.strip()+"%"+"'"
-           query_str = query_str+searchField+" LIKE "+temp 
-           query_str = query_str+" ORDER BY "+searchField+" "+sortType
-           print(query_str)
-           crsr.execute(query_str)
-           output = crsr.fetchall()
-           output.insert(0,fields)
-           #connection.close()
-           return output
+           if i.strip() != 'NULL':
+               temp = "'"+"%"+i.strip()+"%"+"'"
+               query_str = query_str+searchField+" LIKE "+temp 
+               query_str = query_str+" ORDER BY "+searchField+" "+sortType
+               print(query_str)
+               crsr.execute(query_str)
+               output = crsr.fetchall()
+               output.insert(0,fields)
+               #connection.close()
+               return output
+           else:
+              temp = i.strip()
+              query_str = query_str+searchField+" IS '"+temp+"'" 
+              query_str = query_str+" ORDER BY "+searchField+" "+sortType
+              print(query_str)
+              crsr.execute(query_str)
+              output = crsr.fetchall()
+              output.insert(0,fields)
+              return output
         else:
            value = tempList[index]
            if value != tempList[-1]:
                #if a value, not an operator
                if value not in operators:
                    nextOp = tempList[index+1]
-                   query_str = query_str+searchField+" LIKE '%"+value+"%' "+nextOp+" "
+                   if value != 'NULL':
+                       query_str = query_str+searchField+" LIKE '%"+value+"%' "+nextOp+" "
+                   else:
+                       query_str = query_str+searchField+" IS '"+value+"' "+nextOp+" "
            if value == tempList[-1]:
                if value not in operators:
-                   query_str = query_str+searchField+" LIKE '%"+value+"%'"
+                   if value != 'NULL':
+                       query_str = query_str+searchField+" LIKE '%"+value+"%'"
+                   else:
+                       query_str = query_str+searchField+" IS '"+value+"'"
     query_str = query_str+" ORDER BY "+searchField+" "+sortType
     print(query_str)
     crsr.execute(query_str)
@@ -387,7 +396,10 @@ class Ui_MainWindow(object):
                 for index, j in enumerate(tableData):
                     if index > 0:
                         col_temp = j[f_index]
-                        col_vals.append(str(col_temp))
+                        if col_temp == 'NULL':
+                            col_vals.append(str(""))
+                        else:
+                            col_vals.append(str(col_temp))
                 data2[key] = col_vals    
             data1 = data2  
             # get the number of rows required by counting how many values occur for the key 'filepath' in the dictionary list
@@ -405,7 +417,9 @@ class Ui_MainWindow(object):
                 
                 # now we loop though and populate the cells of the table
                 for m, item in enumerate(data1[key]):
+                    
                     newitem = QTableWidgetItem(item)
+                    #print(newitem)
                     newitem.setFlags(Qt.ItemIsSelectable | Qt.ItemIsEnabled) 
                     self.tableWidget.setItem(m, n, newitem)
             #configure automatic resizing for the columns and rows, and set the column headers
