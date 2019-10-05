@@ -15,7 +15,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 import sys
 import subprocess
-import searcher_data as searcher
+#import searcher_data as searcher
 from PyQt5.QtWidgets import QMainWindow, QApplication, QWidget, QAction, QTableWidget,QTableWidgetItem,QVBoxLayout
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
@@ -305,7 +305,7 @@ class Ui_MainWindow(object):
         self.label.setGeometry(QtCore.QRect(25, 33, 67, 13))
         self.label.setObjectName("label")
         self.tableWidget = QtWidgets.QTableWidget(self.centralwidget)
-        self.tableWidget.setGeometry(QtCore.QRect(10, 140, 1071, 731))
+        self.tableWidget.setGeometry(QtCore.QRect(10, 180, 1071, 680))
         self.tableWidget.setObjectName("tableWidget")
         self.radioButton = QtWidgets.QRadioButton(self.centralwidget)
         self.radioButton.setGeometry(QtCore.QRect(210, 60, 102, 17))
@@ -335,6 +335,7 @@ class Ui_MainWindow(object):
         self.tableWidget.cellDoubleClicked.connect(self.cell_was_clicked)
         self.tableWidget.horizontalHeader().sectionClicked.connect(self.SortByHeader)
         self.lineEdit_2.returnPressed.connect(self.SearchTable)
+        self.createDynamicSearch(self.tableWidget)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
         
         
@@ -436,8 +437,8 @@ class Ui_MainWindow(object):
     # @return N/A
     # =======================================================================================================
     def populateFirstTable(self, tableWidget):
-        csv_data = searcher.get_csv_data(sys.argv[1])
-        test = searcher.display_all(csv_data)
+        csv_data = get_csv_data(sys.argv[1])
+        test = display_all(csv_data,self.conn)
         self.createTable(test)
         
     # =======================================================================================================
@@ -446,8 +447,8 @@ class Ui_MainWindow(object):
     # @return - N/A
     # =======================================================================================================
     def populateFieldSelect(self,comboBox):
-        csv_data = searcher.get_csv_data(sys.argv[1])
-        test = searcher.display_all(csv_data)
+        csv_data = get_csv_data(sys.argv[1])
+        test = display_all(csv_data,self.conn)
         fieldVals = test[0]
         self.comboBox.addItems(fieldVals)
     
@@ -457,8 +458,8 @@ class Ui_MainWindow(object):
     # @return N/A
     # =======================================================================================================    
     def populateFieldSelect2(self,comboBox_2):
-        csv_data = searcher.get_csv_data(sys.argv[1])
-        test = searcher.display_all(csv_data)
+        csv_data = get_csv_data(sys.argv[1])
+        test = display_all(csv_data,self.conn)
         fieldVals = test[0]
         self.comboBox_2.addItems(fieldVals)
     
@@ -577,7 +578,154 @@ class Ui_MainWindow(object):
                   if (i.upper() == "OR" )|(i.upper() == "AND"):
                       return False
           return True
+    
+
+
+    #========================================================================================================
+    # This function will generate an text input for each column header, that may be used to search against multiple values at once
+    # 
+    # 
+    # 
+    #========================================================================================================     
+    def createDynamicSearch(self, tableWidget):
+        numCols = tableWidget.columnCount()
+        colHeaders = []
+        for column in range(numCols):
+            header = tableWidget.horizontalHeaderItem(column)
+            colHeaders.append(header.text())
+            #print(header.text())
+        counter = 0
+        for cell in range(numCols):
+            temp = tableWidget.item(5,counter)
+            #print(temp.frameGeometry().width())
+            #print(temp.text())
+            counter = counter+1
+        self.tableWidget_2 = QtWidgets.QTableWidget(self.centralwidget)
+        self.tableWidget_2.setGeometry(QtCore.QRect(10, 125, 1071, 55))
+        self.tableWidget_2.setObjectName("tableWidget_2")
+        counter = 0
+        self.tableWidget_2.setRowCount(1)
+        self.tableWidget_2.setColumnCount(numCols)
+        self.tableWidget_2.setHorizontalHeaderLabels(colHeaders)
+        self.tableWidget_2.verticalHeader().setVisible(False)
+        self.tableWidget_2.cellChanged.connect(self.cellEdited)
+        counter = 0
+        #item = ""
+        
+        for i in range(numCols):
+            #newitem = QTableWidgetItem(str(item))
+            #newitem.setText("")
+            #print(newitem)
+            #newitem.setFlags(Qt.ItemIsSelectable | Qt.ItemIsEnabled) 
+            self.tableWidget_2.setItem(0, counter, QTableWidgetItem(""))
+            counter = counter+1
             
+            #print(header.geometry().height())
+    
+    #========================================================================================================
+    # This function is called on an edit to the cells used for the dynamic search
+    # 
+    # 
+    # 
+    #======================================================================================================== 
+    def cellEdited(self):
+        #print("edited the cell")
+        #print(self.tableWidget_2.columnCount())
+        searchVals = []
+        searchValStr = []
+        numCols = self.tableWidget_2.columnCount()
+        #print(numCols)
+        column = 0
+        for i in range(numCols):
+            cellVal = self.tableWidget_2.item(0,column)
+            cellCol = self.tableWidget_2.horizontalHeaderItem(column)
+            #
+            #print(cellVal.text())
+            #print(cellCol.text())
+            #print(type(cellVal))
+            #print(cellVal.text())
+            try:
+                cellText = cellVal.text()
+            except AttributeError:
+                x = "y"    
+            else:
+                searchValStr.append(cellCol.text()+" LIKE '%"+cellText+"%'")
+                searchVals.append(cellText)
+            """
+            finally:
+                if cellText:
+                    searchValStr.append(cellCol.text()+" LIKE '%"+cellText+"%'") 
+                print(cellText)
+                searchVals.append(cellText)
+            """
+            """
+                if cellVal.text():
+                    searchValStr.append(cellCol.text()+" LIKE '%"+cellVal.text()+"%'")
+                    searchVals.append(cellVal.text())
+            except AttributeError:
+                """
+            """    
+            else:
+               searchValStr.append(cellCol.text()+" LIKE '%'")
+               searchVals.append("") 
+            """    
+            column = column+1
+        #print(searchVals)
+        #print(searchValStr)
+        
+        #search vals holds the values to search from, search valstr holds the corresponding filed like val part of query
+        connection = self.conn
+        crsr = connection.cursor()
+        if len(searchVals) == 0:
+            #print("no values found")
+            queryStr = "SELECT * FROM filerecords"
+            crsr.execute(queryStr)
+            output = crsr.fetchall()
+            data = get_csv_data(sys.argv[1])
+            fields = data[0]
+            output.insert(0,fields)
+            self.createTable(output)
+            return
+        #performt he dynamic search
+        queryStr = "SELECT * FROM filerecords WHERE "
+        for index, i in enumerate(searchVals):
+            print(index)
+            print(i)
+            if len(searchVals) ==1:
+                #add to query, then execute
+                queryStr = queryStr+searchValStr[index]
+                sortField = self.getSortField(self.comboBox)
+                sortType = self.checkSortType()
+                queryStr = queryStr+" ORDER BY "+sortField+" "+sortType
+                crsr.execute(queryStr)
+                output = crsr.fetchall()
+                data = get_csv_data(sys.argv[1])
+                fields = data[0]
+                output.insert(0,fields)
+                self.createTable(output)
+                print(queryStr)
+                return
+            
+            if i == searchVals[-1]:
+                #if at the end, add then execute
+                #add to query, then execute
+                queryStr = queryStr+searchValStr[index]
+                sortField = self.getSortField(self.comboBox)
+                sortType = self.checkSortType()
+                queryStr = queryStr+" ORDER BY "+sortField+" "+sortType
+                crsr.execute(queryStr)
+                output = crsr.fetchall()
+                data = get_csv_data(sys.argv[1])
+                fields = data[0]
+                output.insert(0,fields)
+                self.createTable(output)
+                print(queryStr)
+                return
+            
+            if index != len(searchVals)-1:
+                queryStr = queryStr+searchValStr[index]+" AND "
+                print(queryStr)
+                #add to query with AND on end
             
 # ===========================================================================================================
 # The main routine which sets up and displays the GUI of the program
