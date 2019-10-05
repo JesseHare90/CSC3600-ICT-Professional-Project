@@ -95,7 +95,7 @@ def get_csv_data(filepath):
         tempdict = {}
         for j in temprecord:
             if (check == "true"):
-                print(temprecord[0])
+                #print(temprecord[0])
                 if isValidPath(temprecord[0]):
                     tempdict["filepath"] = temprecord[0]
                     check = "false"
@@ -193,7 +193,7 @@ def display_search(data, searchString, searchField, sortType, connection):
     crsr = connection.cursor()
     # perform a search on the db for any records whose specified fieldname contains one or more specified strings
     tempList = searchString.split(" ")
-    print(tempList)
+    #print(tempList)
     query_str = "SELECT * FROM filerecords WHERE "
     operators = ["AND","OR"]
     for index, i in enumerate(tempList):
@@ -213,7 +213,7 @@ def display_search(data, searchString, searchField, sortType, connection):
               temp = i.strip()
               query_str = query_str+searchField+" IS '"+temp+"'" 
               query_str = query_str+" ORDER BY "+searchField+" "+sortType
-              print(query_str)
+              #print(query_str)
               crsr.execute(query_str)
               output = crsr.fetchall()
               output.insert(0,fields)
@@ -235,7 +235,7 @@ def display_search(data, searchString, searchField, sortType, connection):
                    else:
                        query_str = query_str+searchField+" IS '"+value+"'"
     query_str = query_str+" ORDER BY "+searchField+" "+sortType
-    print(query_str)
+    #print(query_str)
     crsr.execute(query_str)
     output = crsr.fetchall()
     output.insert(0,fields)
@@ -647,7 +647,9 @@ class Ui_MainWindow(object):
             try:
                 cellText = cellVal.text()
             except AttributeError:
-                x = "y"    
+                searchValStr.append(cellCol.text()+" LIKE '%'")
+                #searchVals.append("")
+                continue
             else:
                 searchValStr.append(cellCol.text()+" LIKE '%"+cellText+"%'")
                 searchVals.append(cellText)
@@ -676,9 +678,25 @@ class Ui_MainWindow(object):
         #search vals holds the values to search from, search valstr holds the corresponding filed like val part of query
         connection = self.conn
         crsr = connection.cursor()
-        if len(searchVals) == 0:
-            #print("no values found")
-            queryStr = "SELECT * FROM filerecords"
+        #print(len(searchVals))
+        #print(searchVals) #"" if not input in cell
+        #print(searchValStr)
+        
+        searchStr = []
+        for index, i in enumerate(searchVals):
+            if i != "":
+                #print(searchVals[index])
+                #print(searchValStr[index])
+                searchStr.append(searchValStr[index])
+        
+        
+        sortField = self.getSortField(self.comboBox)
+        sortType = self.checkSortType()
+        #print(searchStr)
+        if len(searchStr) == 0:
+            
+            queryStr = "SELECT * FROM filerecords ORDER BY "+sortField+" "+sortType
+            print(queryStr)
             crsr.execute(queryStr)
             output = crsr.fetchall()
             data = get_csv_data(sys.argv[1])
@@ -686,47 +704,34 @@ class Ui_MainWindow(object):
             output.insert(0,fields)
             self.createTable(output)
             return
-        #performt he dynamic search
-        queryStr = "SELECT * FROM filerecords WHERE "
-        for index, i in enumerate(searchVals):
-            print(index)
-            print(i)
-            if len(searchVals) ==1:
-                #add to query, then execute
-                queryStr = queryStr+searchValStr[index]
-                sortField = self.getSortField(self.comboBox)
-                sortType = self.checkSortType()
-                queryStr = queryStr+" ORDER BY "+sortField+" "+sortType
-                crsr.execute(queryStr)
-                output = crsr.fetchall()
-                data = get_csv_data(sys.argv[1])
-                fields = data[0]
-                output.insert(0,fields)
-                self.createTable(output)
-                print(queryStr)
-                return
-            
-            if i == searchVals[-1]:
-                #if at the end, add then execute
-                #add to query, then execute
-                queryStr = queryStr+searchValStr[index]
-                sortField = self.getSortField(self.comboBox)
-                sortType = self.checkSortType()
-                queryStr = queryStr+" ORDER BY "+sortField+" "+sortType
-                crsr.execute(queryStr)
-                output = crsr.fetchall()
-                data = get_csv_data(sys.argv[1])
-                fields = data[0]
-                output.insert(0,fields)
-                self.createTable(output)
-                print(queryStr)
-                return
-            
-            if index != len(searchVals)-1:
-                queryStr = queryStr+searchValStr[index]+" AND "
-                print(queryStr)
-                #add to query with AND on end
-            
+        
+        if len(searchStr) == 1:
+            queryStr = "SELECT * FROM filerecords WHERE "+searchStr[0]+ " ORDER BY "+sortField+" "+sortType
+            print(queryStr)
+            crsr.execute(queryStr)
+            output = crsr.fetchall()
+            data = get_csv_data(sys.argv[1])
+            fields = data[0]
+            output.insert(0,fields)
+            self.createTable(output)
+            return
+        
+        
+        for index, y in enumerate(searchStr):
+            queryStr = "SELECT * FROM filerecords WHERE "
+            if y != searchStr[-1]:
+                queryStr = queryStr+y+" AND "
+            else:
+                queryStr = queryStr+y+" ORDER BY "+sortField+" "+sortType
+        print(queryStr)
+        crsr.execute(queryStr)
+        output = crsr.fetchall()
+        data = get_csv_data(sys.argv[1])
+        fields = data[0]
+        output.insert(0,fields)
+        self.createTable(output)
+        return
+        
 # ===========================================================================================================
 # The main routine which sets up and displays the GUI of the program
 # ===========================================================================================================      
