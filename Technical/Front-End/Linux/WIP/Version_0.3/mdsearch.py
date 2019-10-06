@@ -16,7 +16,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 import sys
 import subprocess
 #import searcher_data as searcher
-from PyQt5.QtWidgets import QMainWindow, QApplication, QWidget, QAction, QTableWidget,QTableWidgetItem,QVBoxLayout
+from PyQt5.QtWidgets import QMainWindow, QApplication, QWidget, QAction, QTableWidget,QTableWidgetItem,QVBoxLayout,QMessageBox
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 import sqlite3
@@ -297,7 +297,7 @@ class Ui_MainWindow(object):
         self.lineEdit_2 = QtWidgets.QLineEdit(self.centralwidget)
         self.lineEdit_2.setGeometry(QtCore.QRect(90, 100, 113, 20))
         self.lineEdit_2.setObjectName("lineEdit_2")
-        self.lineEdit_2.setToolTip("Enter one or more comma separated values")
+        self.lineEdit_2.setToolTip("Enter one or more values, separated by either AND or OR operators")
         self.comboBox_2 = QtWidgets.QComboBox(self.centralwidget)
         self.comboBox_2.setGeometry(QtCore.QRect(90, 70, 111, 22))
         self.comboBox_2.setObjectName("comboBox_2")
@@ -521,13 +521,18 @@ class Ui_MainWindow(object):
         searchField = str(self.getSearchField2(self.comboBox_2))
         searchString = str(self.getSearchString(self.lineEdit_2))
         sortOrder = str(self.checkSortType())
+        # check user input using the checkInput function
+        # if valid, display results, otherwise, show an error dialog on screen with information for the user
         if self.checkInput(self.lineEdit_2) == True:
             test = display_search(csv_data,searchString.strip(),searchField.strip(),sortOrder,self.conn)
             self.createTable(test)   
         else:
-            error_dialog = QtWidgets.QErrorMessage()
-            error_dialog.showMessage('Incorrect format/ Invalid Input for Search Function: Please enter values separated by either \'AND\' or \'OR\'')
-            error_dialog.showMessage('woops')
+            error = QMessageBox()
+            error.setIcon(QMessageBox.Critical)
+            error.setText('Incorrect format/ Invalid Input for Search Function')
+            error.setInformativeText('Please enter one or more values separated by either \'AND\' or \'OR\'')
+            error.setWindowTitle("Search Input Error")
+            error.exec_()
     #========================================================================================================
     # Function that enables sorting of data by clicking on column headers, sorting by the particular field alternating in order
     # @param column - the column of the Header Clicked
@@ -583,9 +588,8 @@ class Ui_MainWindow(object):
 
     #========================================================================================================
     # This function will generate an text input for each column header, that may be used to search against multiple values at once
-    # 
-    # 
-    # 
+    # @param tablewidget - the one-row table used to take user input for the dynamic search
+    # @return N/A
     #========================================================================================================     
     def createDynamicSearch(self, tableWidget):
         numCols = tableWidget.columnCount()
@@ -593,12 +597,9 @@ class Ui_MainWindow(object):
         for column in range(numCols):
             header = tableWidget.horizontalHeaderItem(column)
             colHeaders.append(header.text())
-            #print(header.text())
+            
         counter = 0
         for cell in range(numCols):
-            temp = tableWidget.item(5,counter)
-            #print(temp.frameGeometry().width())
-            #print(temp.text())
             counter = counter+1
         self.tableWidget_2 = QtWidgets.QTableWidget(self.centralwidget)
         self.tableWidget_2.setGeometry(QtCore.QRect(10, 125, 1071, 55))
@@ -610,93 +611,58 @@ class Ui_MainWindow(object):
         self.tableWidget_2.verticalHeader().setVisible(False)
         self.tableWidget_2.cellChanged.connect(self.cellEdited)
         counter = 0
-        #item = ""
+        
         
         for i in range(numCols):
-            #newitem = QTableWidgetItem(str(item))
-            #newitem.setText("")
-            #print(newitem)
-            #newitem.setFlags(Qt.ItemIsSelectable | Qt.ItemIsEnabled) 
             self.tableWidget_2.setItem(0, counter, QTableWidgetItem(""))
             counter = counter+1
-            
-            #print(header.geometry().height())
     
     #========================================================================================================
     # This function is called on an edit to the cells used for the dynamic search
-    # 
-    # 
-    # 
+    # It fires whenever a cell's content is changed, and then performs a search depending on the value of the cells
+    # @return - N/A
     #======================================================================================================== 
     def cellEdited(self):
-        #print("edited the cell")
-        #print(self.tableWidget_2.columnCount())
+        
         searchVals = []
         searchValStr = []
         numCols = self.tableWidget_2.columnCount()
-        #print(numCols)
+        
         column = 0
         for i in range(numCols):
             cellVal = self.tableWidget_2.item(0,column)
             cellCol = self.tableWidget_2.horizontalHeaderItem(column)
-            #
-            #print(cellVal.text())
-            #print(cellCol.text())
-            #print(type(cellVal))
-            #print(cellVal.text())
+            # some cell widgets will throw an attribute error because they are empty, so ignore
             try:
                 cellText = cellVal.text()
             except AttributeError:
                 searchValStr.append(cellCol.text()+" LIKE '%'")
-                #searchVals.append("")
                 continue
             else:
                 searchValStr.append(cellCol.text()+" LIKE '%"+cellText+"%'")
                 searchVals.append(cellText)
-            """
-            finally:
-                if cellText:
-                    searchValStr.append(cellCol.text()+" LIKE '%"+cellText+"%'") 
-                print(cellText)
-                searchVals.append(cellText)
-            """
-            """
-                if cellVal.text():
-                    searchValStr.append(cellCol.text()+" LIKE '%"+cellVal.text()+"%'")
-                    searchVals.append(cellVal.text())
-            except AttributeError:
-                """
-            """    
-            else:
-               searchValStr.append(cellCol.text()+" LIKE '%'")
-               searchVals.append("") 
-            """    
             column = column+1
-        #print(searchVals)
-        #print(searchValStr)
+        
         
         #search vals holds the values to search from, search valstr holds the corresponding filed like val part of query
         connection = self.conn
         crsr = connection.cursor()
-        #print(len(searchVals))
-        #print(searchVals) #"" if not input in cell
-        #print(searchValStr)
+        
         
         searchStr = []
         for index, i in enumerate(searchVals):
             if i != "":
-                #print(searchVals[index])
-                #print(searchValStr[index])
+                
                 searchStr.append(searchValStr[index])
         
         
         sortField = self.getSortField(self.comboBox)
         sortType = self.checkSortType()
-        #print(searchStr)
+        
         if len(searchStr) == 0:
             
             queryStr = "SELECT * FROM filerecords ORDER BY "+sortField+" "+sortType
-            print(queryStr)
+            #print(queryStr)
             crsr.execute(queryStr)
             output = crsr.fetchall()
             data = get_csv_data(sys.argv[1])
@@ -707,7 +673,7 @@ class Ui_MainWindow(object):
         
         if len(searchStr) == 1:
             queryStr = "SELECT * FROM filerecords WHERE "+searchStr[0]+ " ORDER BY "+sortField+" "+sortType
-            print(queryStr)
+            #print(queryStr)
             crsr.execute(queryStr)
             output = crsr.fetchall()
             data = get_csv_data(sys.argv[1])
@@ -723,7 +689,7 @@ class Ui_MainWindow(object):
                 queryStr = queryStr+y+" AND "
             else:
                 queryStr = queryStr+y+" ORDER BY "+sortField+" "+sortType
-        print(queryStr)
+        #print(queryStr)
         crsr.execute(queryStr)
         output = crsr.fetchall()
         data = get_csv_data(sys.argv[1])
