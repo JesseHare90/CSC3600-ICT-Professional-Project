@@ -100,6 +100,8 @@ def csv_output(output_csv, global_array):
 # ----------------------------------------------------------------
 def populate(input_file):
     hachoir_compatibile_files = ['bzip2','cab','gzip','mar','tar','zip','aiff','mpeg','real_audio','sun_next_snd','matroska','ogg','real_media','riff','bmp','gif','ico','jpeg','pcx','png','psd','targa','tiff','wmf','xcf','ole2','pcf','torrent','ttf','exe','asf','flv','mov']
+    if os.path.isdir(input_file):
+        return 0    
     file_type = magic.from_file(input_file, mime=True)
     head, sep, file_ext = file_type.partition('/')
     # print(file_ext)    # used for testing
@@ -117,8 +119,8 @@ def populate(input_file):
         fp = open(input_file, 'rb')
         pdf = PdfFileReader(fp)
         info = pdf.getDocumentInfo()
-        num_pages = pdf.getNumPages()
-        print(num_pages)
+        # num_pages = pdf.getNumPages()
+        # print(num_pages)
         return(info)
     elif file_ext == "x-python" or "plain":
         process = subprocess.Popen(["stat", input_file], stdout=subprocess.PIPE, stderr=subprocess.STDOUT, universal_newlines=True)
