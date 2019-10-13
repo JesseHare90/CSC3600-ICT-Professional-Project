@@ -291,7 +291,7 @@ class Ui_MainWindow(object):
         test = display_all(csv_data,self.conn)
         self.qStr = "blank"
         self.lineEdit_2.clear()
-        self.tableWidget_2.clearContents()
+        #self.tableWidget_2.clearContents()
         self.createTable(test)
         
     # =======================================================================================================
