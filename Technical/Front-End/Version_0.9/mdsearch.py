@@ -15,6 +15,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 import sys
 import subprocess
+from pathlib import Path
 #import searcher_data as searcher
 from PyQt5.QtWidgets import QMainWindow, QApplication, QWidget, QAction, QTableWidget,QTableWidgetItem,QVBoxLayout,QMessageBox
 from PyQt5.QtGui import *
@@ -752,7 +753,15 @@ class Ui_MainWindow(object):
 # The main routine which sets up and displays the GUI of the program
 # ===========================================================================================================      
 if __name__ == "__main__":
-    #import sys
+    if len(sys.argv) != 2:
+        print("Error: Incorrect Number of arguments Supplied")
+        print("Error: Mdsearch.py requires only one argument, a valid csv file (created by mdextract.py)")
+        print("See documentation for further details")
+        sys.exit()
+    file = Path(sys.argv[1])
+    if not file.is_file():
+        print("Error: No such file'"+sys.argv[1]+"'")
+        sys.exit()
     app = QtWidgets.QApplication(sys.argv)
     app.setStyle("Fusion")
     MainWindow = QtWidgets.QMainWindow()
