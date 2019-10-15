@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2019.3.14)  15 OCT 2019 16:15
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2019.3.14)  15 OCT 2019 16:58
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -285,11 +285,16 @@ Underfull \hbox (badness 10000) in paragraph at lines 123--124
 
  []
 
-[4] [5] (./CSC3600_Final_Project.aux) ) 
+[4]
+Underfull \hbox (badness 10000) in paragraph at lines 129--130
+
+ []
+
+[5] [6] (./CSC3600_Final_Project.aux) ) 
 Here is how much of TeX's memory you used:
  2557 strings out of 492649
  34282 string characters out of 6129622
- 99405 words of memory out of 5000000
+ 100405 words of memory out of 5000000
  6393 multiletter control sequences out of 15000+600000
  10759 words of font info for 40 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -300,10 +305,10 @@ s/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2018/texmf-dist/fonts
 type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2018/texmf-dist/fonts/ty
 pe1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2018/texmf-dist/fonts/type
 1/public/amsfonts/cm/cmti12.pfb>
-Output written on CSC3600_Final_Project.pdf (6 pages, 259265 bytes).
+Output written on CSC3600_Final_Project.pdf (7 pages, 261355 bytes).
 PDF statistics:
- 44 PDF objects out of 1000 (max. 8388607)
- 29 compressed objects within 1 object stream
+ 49 PDF objects out of 1000 (max. 8388607)
+ 33 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  6 words of extra memory for PDF output out of 10000 (max. 10000000)
 

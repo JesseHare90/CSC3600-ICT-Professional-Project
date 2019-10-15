@@ -17,10 +17,10 @@
 \contentsline {section}{4. Project Report}{5}
 \contentsline {subsection}{4.1 Project Outcome}{5}
 \contentsline {subsection}{4.2 Cost of the Project}{5}
-\contentsline {section}{5. Professionalism and Professional Ethics}{5}
-\contentsline {subsection}{5.1 Professionalism}{5}
-\contentsline {subsection}{5.2 Professional Ethics}{5}
-\contentsline {section}{6. Contribution Distribution}{5}
-\contentsline {section}{7. Conclusions}{5}
-\contentsline {section}{Reference List}{5}
-\contentsline {section}{Appendix}{5}
+\contentsline {section}{5. Professionalism and Professional Ethics}{6}
+\contentsline {subsection}{5.1 Professionalism}{6}
+\contentsline {subsection}{5.2 Professional Ethics}{6}
+\contentsline {section}{6. Contribution Distribution}{6}
+\contentsline {section}{7. Conclusions}{6}
+\contentsline {section}{Reference List}{6}
+\contentsline {section}{Appendix}{6}
