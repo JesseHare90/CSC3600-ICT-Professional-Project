@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2019.3.14)  10 OCT 2019 16:11
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2019.3.14)  15 OCT 2019 16:15
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -256,7 +256,7 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 \openout3 = `CSC3600_Final_Project.toc'.
 
  [1]
-Underfull \hbox (badness 10000) in paragraph at lines 97--98
+Underfull \hbox (badness 10000) in paragraph at lines 94--95
 
  []
 
@@ -266,34 +266,44 @@ Underfull \hbox (badness 10000) in paragraph at lines 99--100
  []
 
 [2]
-Underfull \hbox (badness 10000) in paragraph at lines 104--105
+Underfull \hbox (badness 10000) in paragraph at lines 106--107
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 109--110
+Underfull \hbox (badness 10000) in paragraph at lines 111--112
 
  []
 
-[3] [4] (./CSC3600_Final_Project.aux) ) 
+[3]
+Underfull \hbox (badness 10000) in paragraph at lines 116--117
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 123--124
+
+ []
+
+[4] [5] (./CSC3600_Final_Project.aux) ) 
 Here is how much of TeX's memory you used:
  2557 strings out of 492649
  34282 string characters out of 6129622
- 98405 words of memory out of 5000000
+ 99405 words of memory out of 5000000
  6393 multiletter control sequences out of 15000+600000
  10759 words of font info for 40 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 41i,7n,27p,477b,281s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 41i,7n,27p,694b,281s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2018/texmf-dist/font
 s/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2018/texmf-dist/fonts
 /type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2018/texmf-dist/fonts/
 type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2018/texmf-dist/fonts/ty
 pe1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2018/texmf-dist/fonts/type
 1/public/amsfonts/cm/cmti12.pfb>
-Output written on CSC3600_Final_Project.pdf (5 pages, 255612 bytes).
+Output written on CSC3600_Final_Project.pdf (6 pages, 259265 bytes).
 PDF statistics:
- 41 PDF objects out of 1000 (max. 8388607)
- 27 compressed objects within 1 object stream
+ 44 PDF objects out of 1000 (max. 8388607)
+ 29 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  6 words of extra memory for PDF output out of 10000 (max. 10000000)
 
