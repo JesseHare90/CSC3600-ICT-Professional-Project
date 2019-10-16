@@ -1,26 +1,29 @@
 \contentsline {section}{1. Executive Summary}{2}
-\contentsline {section}{2. Methodology}{2}
-\contentsline {subsection}{2.1 Methodology Statement}{2}
-\contentsline {subsection}{2.2 Justifications}{2}
-\contentsline {subsection}{2.3 Discussions}{2}
-\contentsline {section}{3. Project Process}{2}
-\contentsline {subsection}{3.1 Team Organisation}{2}
-\contentsline {subsection}{3.2 Team Structure and Roles}{3}
-\contentsline {subsection}{3.3 Communication and Meetings}{3}
-\contentsline {subsubsection}{3.3.1 Effectiveness of Communication}{3}
-\contentsline {subsubsection}{3.3.2 Team Meetings}{3}
-\contentsline {subsection}{3.4 Documentation}{4}
-\contentsline {subsection}{3.5 Process}{4}
-\contentsline {subsubsection}{3.5.1 Overall Process}{4}
-\contentsline {subsubsection}{3.5.2 Difficulties Encountered}{5}
-\contentsline {subsubsection}{3.5.3 Beneficial Strategies}{5}
-\contentsline {section}{4. Project Report}{5}
-\contentsline {subsection}{4.1 Project Outcome}{5}
-\contentsline {subsection}{4.2 Cost of the Project}{5}
-\contentsline {section}{5. Professionalism and Professional Ethics}{6}
-\contentsline {subsection}{5.1 Professionalism}{6}
-\contentsline {subsection}{5.2 Professional Ethics}{6}
-\contentsline {section}{6. Contribution Distribution}{6}
-\contentsline {section}{7. Conclusions}{6}
-\contentsline {section}{Reference List}{6}
-\contentsline {section}{Appendix}{6}
+\contentsline {section}{2. Methodology}{3}
+\contentsline {subsection}{2.1 Methodology Statement}{3}
+\contentsline {subsection}{2.2 Justifications}{3}
+\contentsline {subsubsection}{2.2.1 Why Scrum Was Used}{3}
+\contentsline {subsubsection}{2.2.2 Benefits of Scrum}{3}
+\contentsline {subsubsection}{2.2.3 Disadvantages of Scrum}{3}
+\contentsline {subsection}{2.3 Discussions}{3}
+\contentsline {section}{3. Project Process}{3}
+\contentsline {subsection}{3.1 Team Organisation}{3}
+\contentsline {subsection}{3.2 Team Structure and Roles}{4}
+\contentsline {subsection}{3.3 Communication and Meetings}{4}
+\contentsline {subsubsection}{3.3.1 Effectiveness of Communication}{4}
+\contentsline {subsubsection}{3.3.2 Team Meetings}{5}
+\contentsline {subsection}{3.4 Documentation}{5}
+\contentsline {subsection}{3.5 Process}{6}
+\contentsline {subsubsection}{3.5.1 Overall Process}{6}
+\contentsline {subsubsection}{3.5.2 Difficulties Encountered}{6}
+\contentsline {subsubsection}{3.5.3 Beneficial Strategies}{6}
+\contentsline {section}{4. Project Report}{6}
+\contentsline {subsection}{4.1 Project Outcome}{7}
+\contentsline {subsection}{4.2 Cost of the Project}{7}
+\contentsline {section}{5. Professionalism and Professional Ethics}{7}
+\contentsline {subsection}{5.1 Professionalism}{7}
+\contentsline {subsection}{5.2 Professional Ethics}{7}
+\contentsline {section}{6. Contribution Distribution}{7}
+\contentsline {section}{7. Conclusions}{7}
+\contentsline {section}{Reference List}{7}
+\contentsline {section}{Appendix}{7}
