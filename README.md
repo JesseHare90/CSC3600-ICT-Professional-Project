@@ -19,7 +19,7 @@
 **James McKeown**     - U1093772@umail.usq.edu.au\
 **Ryan Sharp**        - U1090072@umail.usq.edu.au\
 **Richard Dobson**    - U1011744@umail.usq.edu.au\
-**Vincent Robertski** - U1046454@umail.usq.edu.au\
+**Vincent Robertski** - U1046454@umail.usq.edu.au
 
 ## Installation
 
