@@ -74,5 +74,5 @@ python3 mdsearch.py file_path
 
 An example of the searcher to follow suit with the extractor:
 ```
-python3 mdsearch.py /Users?U1093772/Desktop/test/out.csv
+python3 mdsearch.py /Users/U1093772/Desktop/test/out.csv
 ```
