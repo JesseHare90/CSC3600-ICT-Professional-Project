@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2019.3.14)  16 OCT 2019 15:37
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2019.3.14)  16 OCT 2019 16:38
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -267,11 +267,6 @@ Underfull \hbox (badness 10000) in paragraph at lines 110--111
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 115--116
-
- []
-
-
 Underfull \hbox (badness 10000) in paragraph at lines 122--123
 
  []
@@ -282,7 +277,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 127--128
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 132--133
+Underfull \hbox (badness 10000) in paragraph at lines 134--135
 
  []
 
@@ -292,29 +287,40 @@ Underfull \hbox (badness 10000) in paragraph at lines 139--140
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 145--146
+Underfull \hbox (badness 10000) in paragraph at lines 144--145
 
  []
 
-[6] [7] [8] (./CSC3600_Final_Project.aux) ) 
+
+Underfull \hbox (badness 10000) in paragraph at lines 151--152
+
+ []
+
+[6]
+Underfull \hbox (badness 10000) in paragraph at lines 157--158
+
+ []
+
+[7] [8] (./CSC3600_Final_Project.aux) ) 
 Here is how much of TeX's memory you used:
- 2600 strings out of 492649
- 34980 string characters out of 6129622
+ 2602 strings out of 492649
+ 35004 string characters out of 6129622
  101183 words of memory out of 5000000
- 6432 multiletter control sequences out of 15000+600000
- 10759 words of font info for 40 fonts, out of 8000000 for 9000
+ 6433 multiletter control sequences out of 15000+600000
+ 11105 words of font info for 41 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  41i,7n,27p,694b,281s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2018/texmf-dist/
-fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2018/texmf-dist/f
-onts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2018/texmf-dist/fo
-nts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2018/texmf-dist/font
-s/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2018/texmf-dist/fonts/
-type1/public/amsfonts/cm/cmti12.pfb>
-Output written on CSC3600_Final_Project.pdf (9 pages, 264659 bytes).
+</usr/local/texlive/2018/texmf-dist/font
+s/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2018/texmf-dist/fonts
+/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2018/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2018/texmf-dist/fonts/ty
+pe1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2018/texmf-dist/fonts/type
+1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1
+/public/amsfonts/cm/cmti12.pfb>
+Output written on CSC3600_Final_Project.pdf (9 pages, 278651 bytes).
 PDF statistics:
- 55 PDF objects out of 1000 (max. 8388607)
- 37 compressed objects within 1 object stream
+ 59 PDF objects out of 1000 (max. 8388607)
+ 40 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  6 words of extra memory for PDF output out of 10000 (max. 10000000)
 

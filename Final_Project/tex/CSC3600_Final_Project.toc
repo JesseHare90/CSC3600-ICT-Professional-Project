@@ -6,23 +6,25 @@
 \contentsline {subsubsection}{2.2.2 Benefits of Scrum}{3}
 \contentsline {subsubsection}{2.2.3 Disadvantages of Scrum}{3}
 \contentsline {subsection}{2.3 Discussions}{4}
+\contentsline {subsubsection}{2.3.1 How Scrum Was Followed}{4}
+\contentsline {subsubsection}{2.3.2 How Scrum Will Be Used In The Future}{4}
 \contentsline {section}{3. Project Process}{4}
 \contentsline {subsection}{3.1 Team Organisation}{4}
-\contentsline {subsection}{3.2 Team Structure and Roles}{4}
+\contentsline {subsection}{3.2 Team Structure and Roles}{5}
 \contentsline {subsection}{3.3 Communication and Meetings}{5}
 \contentsline {subsubsection}{3.3.1 Effectiveness of Communication}{5}
-\contentsline {subsubsection}{3.3.2 Team Meetings}{5}
-\contentsline {subsection}{3.4 Documentation}{5}
-\contentsline {subsection}{3.5 Process}{6}
-\contentsline {subsubsection}{3.5.1 Overall Process}{6}
-\contentsline {subsubsection}{3.5.2 Difficulties Encountered}{6}
-\contentsline {subsubsection}{3.5.3 Beneficial Strategies}{6}
+\contentsline {subsubsection}{3.3.2 Team Meetings}{6}
+\contentsline {subsection}{3.4 Documentation}{6}
+\contentsline {subsection}{3.5 Process}{7}
+\contentsline {subsubsection}{3.5.1 Overall Process}{7}
+\contentsline {subsubsection}{3.5.2 Difficulties Encountered}{7}
+\contentsline {subsubsection}{3.5.3 Beneficial Strategies}{7}
 \contentsline {section}{4. Project Report}{7}
-\contentsline {subsection}{4.1 Project Outcome}{7}
-\contentsline {subsection}{4.2 Cost of the Project}{7}
-\contentsline {section}{5. Professionalism and Professional Ethics}{7}
-\contentsline {subsection}{5.1 Professionalism}{7}
-\contentsline {subsection}{5.2 Professional Ethics}{7}
+\contentsline {subsection}{4.1 Project Outcome}{8}
+\contentsline {subsection}{4.2 Cost of the Project}{8}
+\contentsline {section}{5. Professionalism and Professional Ethics}{8}
+\contentsline {subsection}{5.1 Professionalism}{8}
+\contentsline {subsection}{5.2 Professional Ethics}{8}
 \contentsline {section}{6. Contribution Distribution}{8}
 \contentsline {section}{7. Conclusions}{8}
 \contentsline {section}{Reference List}{8}
