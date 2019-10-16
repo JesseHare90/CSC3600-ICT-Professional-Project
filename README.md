@@ -59,10 +59,10 @@ optional arguments:
 
 For example to search the folder "test" recursively and output to out.csv:
 ```
-python3 mdextracy.py -r /Users/U1093772/Desktop/test -o out.csv
+python3 mdextract.py -r /Users/U1093772/Desktop/test -o out.csv
 ```
 
 For non-recursive use we remove the -r optional argument:
 ```
-python3 mdextracy.py /Users/U1093772/Desktop/test -o out.csv
+python3 mdextract.py /Users/U1093772/Desktop/test -o out.csv
 ```
