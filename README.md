@@ -66,3 +66,13 @@ For non-recursive use we remove the -r optional argument:
 ```
 python3 mdextract.py /Users/U1093772/Desktop/test -o out.csv
 ```
+
+To utilise the searcher functionality you can open a CSV file as follows:
+```
+python3 mdsearch.py file_path
+```
+
+An example of the searcher to follow suit with the extractor:
+```
+python3 mdsearch.py /Users?U1093772/Desktop/test/out.csv
+```
