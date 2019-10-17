@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2019.3.14)  17 OCT 2019 18:24
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2019.3.14)  17 OCT 2019 20:06
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -303,27 +303,27 @@ Underfull \hbox (badness 10000) in paragraph at lines 167--168
  []
 
 [8]
-Underfull \hbox (badness 10000) in paragraph at lines 186--187
+Underfull \hbox (badness 10000) in paragraph at lines 184--185
 
  []
 
 <hardware_table.png, id=38, 507.8975pt x 89.33376pt>
 File: hardware_table.png Graphic file (type png)
 <use hardware_table.png>
-Package pdftex.def Info: hardware_table.png  used on input line 188.
+Package pdftex.def Info: hardware_table.png  used on input line 186.
 (pdftex.def)             Requested size: 360.60976pt x 63.4274pt.
 
-Overfull \hbox (0.60976pt too wide) in paragraph at lines 188--189
+Overfull \hbox (0.60976pt too wide) in paragraph at lines 186--187
 [][] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 188--189
+Underfull \hbox (badness 10000) in paragraph at lines 186--187
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 194--195
+Underfull \hbox (badness 10000) in paragraph at lines 192--193
 
  []
 
@@ -331,11 +331,16 @@ Underfull \hbox (badness 10000) in paragraph at lines 194--195
 <software_table.png, id=44, 509.905pt x 156.585pt>
 File: software_table.png Graphic file (type png)
 <use software_table.png>
-Package pdftex.def Info: software_table.png  used on input line 196.
+Package pdftex.def Info: software_table.png  used on input line 194.
 (pdftex.def)             Requested size: 362.03508pt x 111.17612pt.
 
-Overfull \hbox (2.03508pt too wide) in paragraph at lines 196--197
+Overfull \hbox (2.03508pt too wide) in paragraph at lines 194--195
 [][] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 194--195
+
  []
 
 
@@ -344,27 +349,27 @@ Underfull \hbox (badness 10000) in paragraph at lines 196--197
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 206--207
+Underfull \hbox (badness 10000) in paragraph at lines 204--205
 
  []
 
 <team_cost.png, id=45, 507.8975pt x 240.9pt>
 File: team_cost.png Graphic file (type png)
 <use team_cost.png>
-Package pdftex.def Info: team_cost.png  used on input line 208.
+Package pdftex.def Info: team_cost.png  used on input line 206.
 (pdftex.def)             Requested size: 360.60976pt x 171.04018pt.
 
-Overfull \hbox (0.60976pt too wide) in paragraph at lines 208--209
+Overfull \hbox (0.60976pt too wide) in paragraph at lines 206--207
 [][] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 208--209
+Underfull \hbox (badness 10000) in paragraph at lines 206--207
 
  []
 
-[10 <./software_table.png>] [11 <./team_cost.png>] (./CSC3600_Final_Project.aux
-) ) 
+[10 <./software_table.png>] [11 <./team_cost.png>] [12]
+(./CSC3600_Final_Project.aux) ) 
 Here is how much of TeX's memory you used:
  2618 strings out of 492649
  35310 string characters out of 6129622
@@ -373,16 +378,17 @@ Here is how much of TeX's memory you used:
  11105 words of font info for 41 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  41i,7n,27p,694b,281s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pf
-b></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb
-></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><
-/usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></u
-sr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></us
-r/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on CSC3600_Final_Project.pdf (12 pages, 518504 bytes).
+</usr/local/texlive/2018/texmf-dist/fonts/type1/
+public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/p
+ublic/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/pu
+blic/amsfonts/cm/cmr10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmr12.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public
+/amsfonts/cm/cmti10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/
+amsfonts/cm/cmti12.pfb>
+Output written on CSC3600_Final_Project.pdf (13 pages, 519385 bytes).
 PDF statistics:
- 75 PDF objects out of 1000 (max. 8388607)
- 47 compressed objects within 1 object stream
+ 79 PDF objects out of 1000 (max. 8388607)
+ 50 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  21 words of extra memory for PDF output out of 10000 (max. 10000000)
 

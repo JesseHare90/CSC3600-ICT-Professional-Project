@@ -23,14 +23,14 @@
 \contentsline {subsection}{4.1 Project Outcome}{9}
 \contentsline {subsection}{4.2 Cost of the Project}{9}
 \contentsline {subsubsection}{4.2.1 Cost of Hardware}{9}
-\contentsline {subsubsection}{4.2.2 Cost of Software}{10}
+\contentsline {subsubsection}{4.2.2 Cost of Software}{9}
 \contentsline {subsubsection}{4.2.3 Time Cost}{10}
 \contentsline {subsubsection}{4.2.4 Labor Cost}{10}
-\contentsline {subsubsection}{4.2.5 Lessons Learnt}{11}
+\contentsline {subsubsection}{4.2.5 Lessons Learnt About Project Cost Estimation}{11}
 \contentsline {section}{5. Professionalism and Professional Ethics}{11}
 \contentsline {subsection}{5.1 Professionalism}{11}
 \contentsline {subsection}{5.2 Professional Ethics}{11}
-\contentsline {section}{6. Contribution Distribution}{11}
-\contentsline {section}{7. Conclusions}{11}
-\contentsline {section}{Reference List}{11}
-\contentsline {section}{Appendix}{11}
+\contentsline {section}{6. Contribution Distribution}{12}
+\contentsline {section}{7. Conclusions}{12}
+\contentsline {section}{Reference List}{12}
+\contentsline {section}{Appendix}{12}
