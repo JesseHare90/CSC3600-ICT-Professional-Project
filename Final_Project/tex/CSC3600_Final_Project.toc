@@ -1,31 +1,36 @@
-\contentsline {section}{1. Executive Summary}{2}
-\contentsline {section}{2. Methodology}{3}
-\contentsline {subsection}{2.1 Methodology Statement}{3}
-\contentsline {subsection}{2.2 Justifications}{3}
-\contentsline {subsubsection}{2.2.1 Why Scrum Was Used}{3}
-\contentsline {subsubsection}{2.2.2 Benefits of Scrum}{3}
-\contentsline {subsubsection}{2.2.3 Disadvantages of Scrum}{3}
-\contentsline {subsection}{2.3 Discussions}{4}
-\contentsline {subsubsection}{2.3.1 How Scrum Was Followed}{4}
-\contentsline {subsubsection}{2.3.2 How Scrum Will Be Used In The Future}{4}
-\contentsline {section}{3. Project Process}{4}
-\contentsline {subsection}{3.1 Team Organisation}{4}
-\contentsline {subsection}{3.2 Team Structure and Roles}{5}
-\contentsline {subsection}{3.3 Communication and Meetings}{5}
-\contentsline {subsubsection}{3.3.1 Effectiveness of Communication}{5}
-\contentsline {subsubsection}{3.3.2 Team Meetings}{6}
-\contentsline {subsection}{3.4 Documentation}{6}
-\contentsline {subsection}{3.5 Process}{7}
-\contentsline {subsubsection}{3.5.1 Overall Process}{7}
-\contentsline {subsubsection}{3.5.2 Difficulties Encountered}{7}
-\contentsline {subsubsection}{3.5.3 Beneficial Strategies}{7}
-\contentsline {section}{4. Project Report}{8}
-\contentsline {subsection}{4.1 Project Outcome}{8}
-\contentsline {subsection}{4.2 Cost of the Project}{8}
-\contentsline {section}{5. Professionalism and Professional Ethics}{8}
-\contentsline {subsection}{5.1 Professionalism}{8}
-\contentsline {subsection}{5.2 Professional Ethics}{8}
-\contentsline {section}{6. Contribution Distribution}{8}
-\contentsline {section}{7. Conclusions}{8}
-\contentsline {section}{Reference List}{8}
-\contentsline {section}{Appendix}{8}
+\contentsline {section}{1. Executive Summary}{3}
+\contentsline {section}{2. Methodology}{4}
+\contentsline {subsection}{2.1 Methodology Statement}{4}
+\contentsline {subsection}{2.2 Justifications}{4}
+\contentsline {subsubsection}{2.2.1 Why Scrum Was Used}{4}
+\contentsline {subsubsection}{2.2.2 Benefits of Scrum}{4}
+\contentsline {subsubsection}{2.2.3 Disadvantages of Scrum}{4}
+\contentsline {subsection}{2.3 Discussions}{5}
+\contentsline {subsubsection}{2.3.1 How Scrum Was Followed}{5}
+\contentsline {subsubsection}{2.3.2 How Scrum Will Be Used In The Future}{5}
+\contentsline {section}{3. Project Process}{5}
+\contentsline {subsection}{3.1 Team Organisation}{5}
+\contentsline {subsection}{3.2 Team Structure and Roles}{6}
+\contentsline {subsection}{3.3 Communication and Meetings}{6}
+\contentsline {subsubsection}{3.3.1 Effectiveness of Communication}{6}
+\contentsline {subsubsection}{3.3.2 Team Meetings}{7}
+\contentsline {subsection}{3.4 Documentation}{7}
+\contentsline {subsection}{3.5 Process}{8}
+\contentsline {subsubsection}{3.5.1 Overall Process}{8}
+\contentsline {subsubsection}{3.5.2 Difficulties Encountered}{8}
+\contentsline {subsubsection}{3.5.3 Beneficial Strategies}{8}
+\contentsline {section}{4. Project Report}{9}
+\contentsline {subsection}{4.1 Project Outcome}{9}
+\contentsline {subsection}{4.2 Cost of the Project}{9}
+\contentsline {subsubsection}{4.2.1 Cost of Hardware}{9}
+\contentsline {subsubsection}{4.2.2 Cost of Software}{10}
+\contentsline {subsubsection}{4.2.3 Time Cost}{10}
+\contentsline {subsubsection}{4.2.4 Labor Cost}{10}
+\contentsline {subsubsection}{4.2.5 Lessons Learnt}{11}
+\contentsline {section}{5. Professionalism and Professional Ethics}{11}
+\contentsline {subsection}{5.1 Professionalism}{11}
+\contentsline {subsection}{5.2 Professional Ethics}{11}
+\contentsline {section}{6. Contribution Distribution}{11}
+\contentsline {section}{7. Conclusions}{11}
+\contentsline {section}{Reference List}{11}
+\contentsline {section}{Appendix}{11}
