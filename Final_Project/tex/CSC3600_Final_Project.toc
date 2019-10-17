@@ -33,6 +33,7 @@
 \contentsline {section}{6. Contribution Distribution}{12}
 \contentsline {subsection}{6.1 How Work Was Distributed}{12}
 \contentsline {subsection}{6.2 How Effective Was The Distribution}{12}
+\contentsline {subsection}{6.3 Task Distribution Table}{12}
 \contentsline {section}{7. Conclusions}{12}
 \contentsline {section}{Reference List}{12}
 \contentsline {section}{Appendix}{12}
