@@ -205,7 +205,7 @@ def main():
             #print(line)
             #print(len(line))
             if fileType != 'pdf':
-                badKeys = ['Access','Modify','Change','Birth','Device','Size','Metadata','File']
+                badKeys = ['Access','Modify','Change','Birth','Device','Size','Metadata','File','Audio','Common']
                 fileStat = os.stat(global_array[index])
                 accTime = datetime.fromtimestamp(fileStat.st_atime).strftime("%D %I:%M:%S")
                 modTime = datetime.fromtimestamp(fileStat.st_mtime).strftime("%D %I:%M:%S")
@@ -223,7 +223,10 @@ def main():
                                 tk = tempKey.replace(" ","")
                                 tV = temp[tempKey]
                                 tV = tV.replace(" ","_")
+                                tV = tV.replace("_pixels","")
                                 if tk in badKeys:
+                                    continue
+                                if 'File' in tk:
                                     continue
                                 else:    
                                     kvStr = tk.replace("/","per")+":"+tV+","
@@ -234,6 +237,7 @@ def main():
                             #records.append(fileStr)
                 #print(fileStr)
                 records.append(fileStr)
+            
             else:
                 
                 if fileType == 'pdf':
