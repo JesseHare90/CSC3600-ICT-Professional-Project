@@ -76,6 +76,7 @@ def get_csv_data(filepath):
     #initialise with first attribute, filepath (csv file format doesn't specify the key for the filepath)
     attr_set = ["filepath"]
     #now populate the attribute set with all types of metadata attributes found in records
+    print(records)
     for i in records:
         temp = i
         for j in temp[1:]:
@@ -92,6 +93,8 @@ def get_csv_data(filepath):
         for j in temprecord:
             if (check == "true"):
                 #the first value for each line of csv should be a filepath on it's own, if a valid path, pair with the key 'filepath' for that record
+                
+                
                 if isValidPath(temprecord[0]):
                     tempdict["filepath"] = temprecord[0]
                     check = "false"
@@ -99,14 +102,18 @@ def get_csv_data(filepath):
                     # if the formatting of the csv file incorrect: expects a filepath as the first attribute on each line, terminates program
                     print("ERROR: Incorrect formatting of csv file: Expected valid filepath where none was found")
                     raise SystemExit
+                
             else:
                 #split key values at ':'
+                #print(j)
                 kv = j.split(":")
                 tempdict[kv[0]] = kv[1]
         rows.append(tempdict)
         check = "true"
     # insert before file records the list of all unique attribute types found in csv file
     rows.insert(0,list(attr_set))
+    #print(rows)
+    csv_data.close()
     return rows
 
 # =======================================================================================================
@@ -117,7 +124,16 @@ def get_csv_data(filepath):
 def create_connection(data):
     connection = sqlite3.connect(':memory:')
     rows = []
-    fields = data[0]
+    tempFields = data[0]
+    fields = []
+    for i in tempFields:
+        if '/' in i:
+            tempField = i.replace("/","to")
+            fields.append(tempField.replace(" ",""))
+        else:
+            fields.append(i.replace(" ",""))
+        
+    #print(fields)
     for index, x in enumerate(data):
         temp = data[index]
         if (index > 0):
@@ -127,12 +143,13 @@ def create_connection(data):
     for i in fields:
         field = i
         #size is a pretty universal attribute type, so we will make that field in the db store integers
-        if field == "size":
+        if field in ["Size","Imageheight","Imagewidth"]:
             field_str = field_str+field+" INTEGER(50),"
         else:
            field_str = field_str+field+" VARCHAR(50)," 
     field_str = field_str[:-1]
     field_str = field_str+");" 
+    #print(field_str)
     crsr.execute(field_str)
     #create an insert statement for the sql database
     #get first part of the insert query
