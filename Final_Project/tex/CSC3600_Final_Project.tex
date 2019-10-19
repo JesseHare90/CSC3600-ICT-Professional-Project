@@ -175,7 +175,77 @@ Using Trello boards also assisted in the development of the project. It allowed 
 
 \section{4. Project Report}
 \subsection{4.1 Project Outcome}
-Lorem Ipsum
+
+\subsubsection{4.1.1 The Project}
+The aim of this project was to implement a software solution to our client’s need to search for and examine file metadata from a potentially large dataset. In order to do this, we had to design and develop a solution that consisted of two components. The first of the two, the file metadata harvester, is used to gather the file metadata from files, whereas the second component, the searcher, will make use of a GUI to display that harvest information, and enable the client to interact with it, and perform a variety of functions that will aid in the user’s search for particular files.
+
+\subsubsection{4.1.2 Project Outcome} 
+The deliverable for our client at the end of this project consists of two software components, and their supporting documentation. We have managed to produce working versions of both components, and now we will go over the outcomes for each of these components in more detail
+
+\subsubsection{4.1.3 Metadata Harvester Outcomes}
+The Harvester program we have developed can be used to search a specified directory, either recursively or non-recursively, and extract the metadata for any files found within the search area. A recursive search will begin in the target directory but will also expand to within and subdirectories within the search directory and continue till there are no more subdirectories to search within. If the user specifies that a recursive search is to be performed, it can be expected to take a little more time than a search performed on a single directory. \\
+
+When the Harvester program is invoked, before it’s runtime is over it will write all the file metadata to a user-specified file. This file is what is used by the searcher program as input to display the file metadata in a more accessible and interactive GUI format. \\
+
+The harvester program extracts metadata using the following methods:
+
+\begin{itemize}
+\item Hachoir external Python Library – this tool is the most valuable in regard to metadata extraction, it is able to extract data from a large range of file types, however it still comes with quirks and it’s own set of challenges
+\item PyPDF2 external Python Library – this library is used to extract metadata from pdf files. We had to use this library because Hachoir deals with most file types except text-based ones, such as pdf, docx, .txt etc. 
+
+\end{itemize}
+
+•	Os Python module – this useful module native to Python is invaluable in gathering standardised file metadata such as type, creation, modification and accessed dates. This module can extract the same set of data from any type of file, so we have used this module to ensure all files represented in the searcher GUI have at least this subset of metadata information available to the user.
+There are some filetypes in which the data extracted will be slightly lacking, and the reason being is simply due to time constraints our team didn’t have the time to find more metadata extraction libraries that were focused towards those files that we had difficulty in obtaining data for.
+If our project does get continued funding, our priority for this component will be the broadening of the types of metadata that can be extracted from a larger range of filetypes. This is not exactly a difficult task, although it is time consuming as all metadata extraction libraries extract their data in different ways, and for our software to work we need it all in the standardised csv format when output to a file.
+We are confident however that our client will be satisfied with this portion of the project deliverable, as they have indicated to us that their main intentions were to harvest data from their own personal files, and the types of those files they will be harvesting are for the most part supported by our metadata harvester program.
+It is worth noting, that as could be expected, the harvesting operation can take time when harvesting many files, and although some optimisation was attempted, we feel that we could maybe do more in the way of reducing waiting time for the users.
+All in all, we as a team feel that the harvester meets the client’s requirements, and although there is room for improvement in regard to performance and the range of files from which unique metadata is gathered, we feel that the harvester will meet our clients requirements.
+
+
+Metadata Searcher Outcomes
+The fundamental aim of the Searcher program was to develop a GUI that displayed the harvested file metadata. This metadata could be interacted in a way that would facilitate sorting/searching and filtering on file metadata values to enable a user to located certain files or groups of files that share common attributes easily.
+This aim was achieved quite early on, however over the course of development, there were additional requirements introduced that improved the searcher programs usability and utility. The GUI design and layout itself changed a few times over development, as well as the functionality and usage of GUI elements.
+We decided to make use of the external Python library PyQt5 to handle the GUI implementation, but all other libraries used were modules that were native to Python. The most important module we used beside PyQt5 was the SQLite3 library. This library enables the creation of Relational Databases using the Structured Query Language. This proved invaluable in storing the harvested metadata, and interacting with it through SQL queries, which enabled us to manipulate and interact with that data in many ways, opening a lot of possibilities regarding the Searcher program’s functionality.
+In the end we ended up meeting all critical and non-critical requirements gathered from our client over the course of development. The functionalities that the Searcher program provides for it’s users include:
+•	Sorting/Searching of Metadata based on one or more fields
+•	Ability to open files when clicking on the filepath in their respective record
+•	Filtering of results based on one or more fields
+•	Responsiveness
+•	Ease of Use
+Although we are confident that this component has lived up to our client’s expectations, we realise that there is always room for improvement. Further development on the searcher program will likely be focused toward performance improvements, and possibly even additional functionality such as deletion and renaming of files, which could prove to be of great utility for its users.
+Although we focused a lot of resources towards performance/optimisation, the user should still expect that the searcher program may take some time to gather and collect metadata from large csv files. Once the GUI has launched however, all subsequent operations can be expected to perform without delay. The reason for this is that operations on a Relational Database using SQL tend to be quite efficient.
+As a team we are thoroughly satisfied with what we have developed regarding the searcher program, and we hope our client feels the same way. We are confident it has met all their needs and expectations and that it remains an important utility for them for some time to come.
+Project quality
+
+Usability
+
+Regarding the harvesting of metadata, using the harvester program, is simple. To harvest metadata from a directory, the user simply needs to provide the harvester script, the ‘-r’ option if they wish to harvest from a directory recursively, and the path to the output file. If the user enters the arguments incorrectly a help dialog will print to the screen instructing them on the correct command to execute the harvester program from the CLI. Once executed, the user simply must wait briefly until the harvester program has been executed.
+With the Searcher program, execution is even simpler from the CLI. All that is required for an argument is the csv file produced by the harvester program. After a brief wait, the GUI appears on screen. Most of the elements are accompanied by labels, and tooltips on mouseover, and those that aren’t resemble constructs seen in many other types of applications, following common conventions in relation to GUI design. Examples of the intuitive features are things such as double clicking on a column header to sort, and the results filter that appears above the displayed metadata. The only part of the GUI where a user may get caught out or feel unsure, will provide information on incorrect user input that instructs the user on the correct way of using that widget. Another intuitive feature we included is the ability to double click on file paths to open the file, which is a common practice in many file manager/explorer applications, and it is something that most users may try to do automatically.
+
+Completeness
+
+As far as the harvester program is concerned, all requirements have been met, and it performs as it should. That being said, there is always the opportunity to expand on the range of filetypes that the harvester program can extract metadata from, as well as the range of potential metadata types it can extract.
+The searcher program has met all requirements as well, functional and non-functional. As new requirements are introduced, we added them promptly, and if development continues so will the addition of features to the searcher program.
+
+Maintainability
+
+As far as maintainability is concerned, that only concerns the harvester program. Maintenance may include the adding/removal/updating of the libraries used to collect the file metadata, but in the end as long as the output remains in the same format, there should be no changes needed on the GUI side of things. Also, there is a generous amount of commenting throughout both the searcher and harvester programs, so developers not familiar with the project would easily be understand how the code works and how to modify it if needed.
+
+Reliability
+
+Reliability issues have been found only in a couple of isolated cases. For the harvester program, data that is not usable by the searcher program or meaningless to a user may be harvested if the harvester is executed on any sort of system folders. The reason being that these folders can sometimes contain obscure filetypes which often have no readable metadata, or the metadata that is read is either of no use to detrimental to the program’s operation.
+As far as the searcher program is concerned, as long as the input csv file is in the correct format, there should be no issues. The searcher program has been thoroughly tested and there has been a significant amount of bug removal to ensure as stable of a user experience as possible.
+
+Portability
+
+Both programs have been designed to work on Linux. Early in development however, we had working versions on windows as well, so If needed further down the track cross-compatibility implementation would not be too big of an issue. As long as the user has python 3.7.x, the Hachoir, PyPDF2 and PyQt5 libraries installed, they should be able to use these programs on any Linux distros.
+
+Performance
+
+Time from execution to completion of the Harvester program is linearly related with the number of files to harvest metadata from. The more files that are harvested for metadata, the longer it will take. Harvesting using a recursive search of approximately 3500 files will take around 2minutes on a mid-range laptop.
+The time from execution to display of the searcher GUI takes slightly more time, however, once the GUI is loaded most if not all operations are near instant. It is important to us that the user is aware of potential waiting times.
+
 
 \subsection{4.2 Cost of the Project}
 The following sub sections will discuss the time and labor costs of the project.
