@@ -119,6 +119,7 @@ def populate(input_file):
             info[line[0].strip()] = line[1].strip()
             metadata.append(info)
         return metadata
+    
     elif file_ext == "pdf":
         fp = open(input_file, 'rb')
         pdf = PdfFileReader(fp)
@@ -126,6 +127,7 @@ def populate(input_file):
         # num_pages = pdf.getNumPages()
         # print(num_pages)
         return(info)
+    
     elif file_ext == "x-python" or "plain":
         process = subprocess.Popen(["stat", input_file], stdout=subprocess.PIPE, stderr=subprocess.STDOUT, universal_newlines=True)
         metadata = []
@@ -181,41 +183,38 @@ def main():
     # ------------------------
     # Phase 3 - Pushing output
     # ------------------------
-    #super_global_array = zip(global_array,test_var)
-    # Call the output function
-    #csv_output(args.output_file, super_global_array)
-    #print(len(global_array))
-    #print(len(test_var))
+    #create an empty array to store files and their metadata later on
     records = []
-    
+    #go through the metadata gathered for each file with the populate function, and format the data correctly for output
     for index, line in enumerate(test_var):
+        # this string will be used for each file to store what will be output later on
         fileStr = ""
+        #we can get filetype simply by splitting the path at ".", which gives us the file ext/filetype
         fileType = global_array[index].split(".")
         fileType = fileType[-1]
-        #print("**************",fileType,"****************")
         fileStr = global_array[index]+","
-        #print(global_array[index])
-        #print(line)
-        #if line is an int (not list of dicts, skip it)
+        #witht he recursive functiob, the gloabal_array for some reason is being populated with numbers instead of filepaths, so skip those
         if isinstance(line,int):
             continue
         #else, we want to go through each dict in list, get keys and values, then append to fileStr, then finally records
         else:
-            # we will come across some crappy data again, so we need to watch out
-            #print(line)
-            #print(len(line))
+            #if the filetype is not equal to pdf, we should have the data gathered using hachoir, we now need to format
             if fileType != 'pdf':
+                #these keys are either repeated, or contain useless or no data in all cases. We will skip these attributes when we come across them
                 badKeys = ['Access','Modify','Change','Birth','Device','Size','Metadata','File','Audio','Common']
+                #gather file attrbutes using os.stat, these attributes will be available for all files regardless of type
                 fileStat = os.stat(global_array[index])
-                accTime = datetime.fromtimestamp(fileStat.st_atime).strftime("%D %I:%M:%S")
-                modTime = datetime.fromtimestamp(fileStat.st_mtime).strftime("%D %I:%M:%S")
+                accTime = datetime.fromtimestamp(fileStat.st_atime).strftime("%d/%m/%y %I:%M:%S")
+                modTime = datetime.fromtimestamp(fileStat.st_mtime).strftime("%d/%m/%y %I:%M:%S")
                 owner = getpwuid(os.stat(global_array[index]).st_uid).pw_name
                 size = os.path.getsize(global_array[index])
                 fType = fileType
+                #populate the string used for the file metadata with the standard attributes we have gathered
                 fileStr = fileStr+"Type:"+fType+",Size:"+str(size)+",Owner:"+owner+",Accessed:"+accTime+",Modified:"+modTime+","
+                #now we go through the data gathered using hachoir, and we format/skip key/value pairs when necessary until we have a correctly formatted string for each file
                 for item in line:
                     temp = item
-                    #print(temp)
+                    #if the particular item is a dictionary type, proceed to format
                     if isinstance(temp,dict):
                         for key in temp:
                             keys = temp.keys()
@@ -230,17 +229,17 @@ def main():
                                     continue
                                 else:    
                                     kvStr = tk.replace("/","per")+":"+tV+","
-                                    print(tk+tV)
-                                #print(kvStr)
+                                    
                                 fileStr = fileStr+kvStr
+                #strip trailing commas from the metadata string
                 fileStr = fileStr.rstrip(",")
-                            #records.append(fileStr)
-                #print(fileStr)
+                #append to the records array, all metadata for the file as a string readable by the searcher program.           
                 records.append(fileStr)
-            
+            #if filetype is a pdf, we will use the pypdf library to extract metadata from each pdf
             else:
-                
                 if fileType == 'pdf':
+                    #use PdfFileReader function from pypdf to get an object containing all the relevant pdf information
+                    #also as earlier, use the os.stat function to get the standard attributes
                     pdf = PdfFileReader(global_array[index])
                     info = pdf.getDocumentInfo()
                     numPages = pdf.getNumPages()
@@ -252,19 +251,15 @@ def main():
                     size = os.path.getsize(global_array[index])
                     fType = 'pdf'
                     fileStat = os.stat(global_array[index])
-                    accTime = datetime.fromtimestamp(fileStat.st_atime).strftime("%D %I:%M:%S")
-                    modTime = datetime.fromtimestamp(fileStat.st_mtime).strftime("%D %I:%M:%S")
+                    accTime = datetime.fromtimestamp(fileStat.st_atime).strftime("%d/%m/%y %I:%M:%S")
+                    modTime = datetime.fromtimestamp(fileStat.st_mtime).strftime("%d/%m/%y %I:%M:%S")
                     owner = getpwuid(os.stat(global_array[index]).st_uid).pw_name
                     fileStr = fileStr+"Type:"+str(fType)+",Size:"+str(size)+",Owner:"+owner+",Accessed:"+accTime+",Modified:"+modTime+",Title:"+str(title)+",Author:"+str(author)+",Pages:"+str(numPages)+",Creator:"+str(creator)+",Producer:"+str(producer)+",Subject:"+str(subject)
-                    #print(fileStr)
+                    #append to records array
                     records.append(fileStr)
                                      
-    #print("*",len(records),"*")
-    #print("records",records)
-    #for item in records:
-        #print("*",'\n')
-        #print(item)
-        
+    
+    #write csv output to file using the csv_output function    
     csv_output(args.output_file,records)
                         
         
