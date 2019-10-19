@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2019.3.14)  19 OCT 2019 18:34
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2019.3.14)  19 OCT 2019 18:42
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -303,27 +303,27 @@ Underfull \hbox (badness 10000) in paragraph at lines 167--168
  []
 
 [8]
-Underfull \hbox (badness 10000) in paragraph at lines 184--185
+Underfull \hbox (badness 10000) in paragraph at lines 186--187
 
  []
 
 <hardware_table.png, id=38, 507.8975pt x 89.33376pt>
 File: hardware_table.png Graphic file (type png)
 <use hardware_table.png>
-Package pdftex.def Info: hardware_table.png  used on input line 186.
+Package pdftex.def Info: hardware_table.png  used on input line 188.
 (pdftex.def)             Requested size: 360.60976pt x 63.4274pt.
 
-Overfull \hbox (0.60976pt too wide) in paragraph at lines 186--187
+Overfull \hbox (29.0625pt too wide) in paragraph at lines 188--189
 [][] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 186--187
+Underfull \hbox (badness 10000) in paragraph at lines 188--189
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 192--193
+Underfull \hbox (badness 10000) in paragraph at lines 193--194
 
  []
 
@@ -331,60 +331,70 @@ Underfull \hbox (badness 10000) in paragraph at lines 192--193
 <software_table.png, id=44, 509.905pt x 156.585pt>
 File: software_table.png Graphic file (type png)
 <use software_table.png>
-Package pdftex.def Info: software_table.png  used on input line 194.
+Package pdftex.def Info: software_table.png  used on input line 195.
 (pdftex.def)             Requested size: 362.03508pt x 111.17612pt.
 
-Overfull \hbox (2.03508pt too wide) in paragraph at lines 194--195
+Overfull \hbox (30.48782pt too wide) in paragraph at lines 195--196
 [][] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 194--195
+Underfull \hbox (badness 10000) in paragraph at lines 195--196
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 196--197
+Underfull \hbox (badness 10000) in paragraph at lines 197--198
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 204--205
+Underfull \hbox (badness 10000) in paragraph at lines 203--204
 
  []
 
 <team_cost.png, id=45, 507.8975pt x 240.9pt>
 File: team_cost.png Graphic file (type png)
 <use team_cost.png>
-Package pdftex.def Info: team_cost.png  used on input line 206.
+Package pdftex.def Info: team_cost.png  used on input line 205.
 (pdftex.def)             Requested size: 360.60976pt x 171.04018pt.
 
-Overfull \hbox (0.60976pt too wide) in paragraph at lines 206--207
+Overfull \hbox (29.0625pt too wide) in paragraph at lines 205--206
 [][] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 206--207
+Underfull \hbox (badness 10000) in paragraph at lines 205--206
 
  []
 
 [10 <./software_table.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 210--211
+
+ []
+
+
 Underfull \hbox (badness 10000) in paragraph at lines 219--220
 
  []
 
-[11 <./team_cost.png>] [12]
-Underfull \hbox (badness 10000) in paragraph at lines 256--257
+[11 <./team_cost.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 240--241
+
+ []
+
+[12]
+Underfull \hbox (badness 10000) in paragraph at lines 257--258
 
  []
 
 <task_distro.png, id=58, 505.89pt x 119.44624pt>
 File: task_distro.png Graphic file (type png)
 <use task_distro.png>
-Package pdftex.def Info: task_distro.png  used on input line 258.
+Package pdftex.def Info: task_distro.png  used on input line 259.
 (pdftex.def)             Requested size: 359.1844pt x 84.8074pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 258--259
+Underfull \hbox (badness 10000) in paragraph at lines 259--260
 
  []
 
@@ -404,7 +414,7 @@ r/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr
 ocal/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/loc
 al/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/loca
 l/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on CSC3600_Final_Project.pdf (18 pages, 601995 bytes).
+Output written on CSC3600_Final_Project.pdf (18 pages, 602082 bytes).
 PDF statistics:
  96 PDF objects out of 1000 (max. 8388607)
  60 compressed objects within 1 object stream
