@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2019.3.14)  20 OCT 2019 10:04
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2019.3.14)  20 OCT 2019 10:41
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -360,22 +360,16 @@ Underfull \hbox (badness 10000) in paragraph at lines 230--231
  []
 
 
-Overfull \hbox (15.35522pt too wide) in paragraph at lines 232--233
-[]\OT1/cmr/m/n/10.95 Although we fo-cused a lot of re-sources to-wards per-for-
-mance/optimisation,
- []
-
-
 Underfull \hbox (badness 10000) in paragraph at lines 232--233
 
  []
 
-
+[12]
 Underfull \hbox (badness 10000) in paragraph at lines 244--245
 
  []
 
-[12]
+
 Underfull \hbox (badness 10000) in paragraph at lines 246--247
 
  []
@@ -420,7 +414,8 @@ Underfull \hbox (badness 10000) in paragraph at lines 284--285
 
  []
 
-<software_table.png, id=60, 509.905pt x 156.585pt>
+[15 <./hardware_table.png>]
+<software_table.png, id=64, 509.905pt x 156.585pt>
 File: software_table.png Graphic file (type png)
 <use software_table.png>
 Package pdftex.def Info: software_table.png  used on input line 286.
@@ -435,7 +430,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 286--287
 
  []
 
-[15 <./hardware_table.png>]
+
 Underfull \hbox (badness 10000) in paragraph at lines 288--289
 
  []
@@ -498,7 +493,7 @@ Here is how much of TeX's memory you used:
  6463 multiletter control sequences out of 15000+600000
  11105 words of font info for 41 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 41i,7n,27p,1044b,281s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 41i,7n,27p,1050b,281s stack positions out of 5000i,500n,10000p,200000b,80000s
 </u
 sr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
 r/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr
@@ -507,7 +502,7 @@ ocal/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/loc
 al/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/loca
 l/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local
 /texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on CSC3600_Final_Project.pdf (24 pages, 621209 bytes).
+Output written on CSC3600_Final_Project.pdf (24 pages, 621402 bytes).
 PDF statistics:
  119 PDF objects out of 1000 (max. 8388607)
  76 compressed objects within 1 object stream
