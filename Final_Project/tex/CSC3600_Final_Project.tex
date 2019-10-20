@@ -175,49 +175,49 @@ Using Trello boards also assisted in the development of the project. It allowed 
 
 \section{4. Project Report}
 \subsection{4.1 Project Outcome}
-The following will discuss...
+The following sub sections will discuss the final outcomes of the project.
 
 \begin{adjustwidth}{1cm}{}
 
 \subsubsection{4.1.1 The Project}
-The aim of this project was to implement a software solution to our client’s need to search for and examine file metadata from a potentially large dataset. In order to do this, we had to design and develop a solution that consisted of two components. The first of the two, the file metadata harvester, is used to gather the file metadata from files, whereas the second component, the searcher, will make use of a GUI to display that harvest information, and enable the client to interact with it, and perform a variety of functions that will aid in the user’s search for particular files.
+The aim of this project was to implement a software solution for the client’s need to search for and examine file metadata from a potentially large dataset. In order to do this, the team had to design and develop a solution that consisted of two components. The first of the two, the file metadata harvester, is used to gather the file metadata from files. The second component, the searcher, makes use of a GUI to display that harvested information. This enables the client to interact with the program, and perform a variety of functions that will aid in their search for particular files.
 
 \subsubsection{4.1.2 Project Outcome} 
-The deliverable for our client at the end of this project consists of two software components, and their supporting documentation. We have managed to produce working versions of both components, and now we will go over the outcomes for each of these components in more detail
+The deliverable for the client at the end of this project consisted of two software components, and their supporting documentation. The team has successfully managed to produce working versions of both components. The report will now go over the outcomes for each of these components in more detail.
 
 \subsubsection{4.1.3 Metadata Harvester Outcomes}
-The Harvester program we have developed can be used to search a specified directory, either recursively or non-recursively, and extract the metadata for any files found within the search area. A recursive search will begin in the target directory but will also expand to within and subdirectories within the search directory and continue till there are no more subdirectories to search within. If the user specifies that a recursive search is to be performed, it can be expected to take a little more time than a search performed on a single directory. \\
+The metadata harvester program the back-end team developed can be used to search a specified directory, either recursively or non-recursively, and extract the metadata for any files found within the search area. A recursive search will begin in the target directory, then expand to subdirectories within the current search directory and continue until there are no more subdirectories to search within. If the user specifies that a recursive search is to be performed, it can be expected to take additional time compared to a search performed on a single directory. \\
 
-When the Harvester program is invoked, before it’s runtime is over it will write all the file metadata to a user-specified file. This file is what is used by the searcher program as input to display the file metadata in a more accessible and interactive GUI format. \\
+When the metadata harvester program is invoked and before it’s runtime is over, it will write all the file metadata to a user-specified file. This file is what is used by the searcher program as input to display the file metadata in a more accessible and interactive GUI format. \\
 
 The harvester program extracts metadata using the following methods:
 
 \begin{itemize}
-\item Hachoir external Python Library – this tool is the most valuable in regard to metadata extraction, it is able to extract data from a large range of file types, however it still comes with quirks and it’s own set of challenges
-\item PyPDF2 external Python Library – this library is used to extract metadata from pdf files. We had to use this library because Hachoir deals with most file types except text-based ones, such as pdf, docx, .txt etc. 
-\item Os Python module – this useful module native to Python is invaluable in gathering standardised file metadata such as type, creation, modification and accessed dates. This module can extract the same set of data from any type of file, so we have used this module to ensure all files represented in the searcher GUI have at least this subset of metadata information available to the user.
+\item \textbf{Hachoir external Python Library} – This tool is the most valuable in regard to metadata extraction, it is able to extract data from a large range of file types, however it still comes with quirks and its own set of challenges
+\item \textbf{PyPDF2 external Python Library} – This library is used to extract metadata from PDF files. The team had to use this library because Hachoir deals with most file types except text-based ones, such as pdf, docx, .txt etc. 
+\item \textbf{Os Python module} – This useful module native to Python is invaluable in gathering standardised file metadata such as type, creation, modification and accessed dates. This module can extract the same set of data from any type of file, so the team used this module to ensure all files represented in the searcher GUI have at least this subset of metadata information available to the user.
 
 \end{itemize}
 	
-There are some filetypes in which the data extracted will be slightly lacking, and the reason being is simply due to time constraints our team didn’t have the time to find more metadata extraction libraries that were focused towards those files that we had difficulty in obtaining data for. \\
+There are some filetypes in which the data extracted was slightly lacking. Unfortunately, due to time constraints, the team didn't have the time to find more metadata extraction libraries that were focused towards files that the team had difficulty obtaining data for. \\
 
-If our project does get continued funding, our priority for this component will be the broadening of the types of metadata that can be extracted from a larger range of filetypes. This is not exactly a difficult task, although it is time consuming as all metadata extraction libraries extract their data in different ways, and for our software to work we need it all in the standardised csv format when output to a file. \\
+If the project does get continued funding, the priority for this component will be the broadening of the types of metadata that can be extracted from a larger range of filetypes. This is not a difficult task, however, it is time consuming as all metadata extraction libraries extract their data in different ways. For the software to work the team needs it all in the standardised CSV format when output to a file. \\
 
-We are confident however that our client will be satisfied with this portion of the project deliverable, as they have indicated to us that their main intentions were to harvest data from their own personal files, and the types of those files they will be harvesting are for the most part supported by our metadata harvester program. \\
+The team is confident that the client will be satisfied with this portion of the project deliverable. This is because they have indicated that their main intentions were to harvest data from their own personal files. The types of  files they will be harvesting are for the most part supported by the metadata harvester program. \\
 
-It is worth noting, that as could be expected, the harvesting operation can take time when harvesting many files, and although some optimisation was attempted, we feel that we could maybe do more in the way of reducing waiting time for the users. \\
+It is worth noting, that as could be expected, the harvesting operation can take additional time when harvesting a high volume of files. Although some optimisation was attempted, the team is of the opinion that they could reduce the wait time for users when running the program. \\
 
-All in all, we as a team feel that the harvester meets the client’s requirements, and although there is room for improvement in regard to performance and the range of files from which unique metadata is gathered, we feel that the harvester will meet our clients requirements.
+In summary, the team is of the opinion that the harvester metadata program meets the client’s requirements. However, there is room for improvement in regard to performance and the range of files from which unique metadata is gathered. This will be addressed should the project gets continued funding.
 
 
 \subsubsection{4.1.4 Metadata Searcher Outcomes}
-The fundamental aim of the Searcher program was to develop a GUI that displayed the harvested file metadata. This metadata could be interacted in a way that would facilitate sorting/searching and filtering on file metadata values to enable a user to located certain files or groups of files that share common attributes easily. \\
+The fundamental aim of the metadata searcher program was to develop a GUI that displayed the harvested file metadata. This metadata could be interacted in a way that would facilitate sorting/searching and filtering on file metadata values to enable a user to locate certain files or groups of files that share common attributes easily. \\
 
-This aim was achieved quite early on, however over the course of development, there were additional requirements introduced that improved the searcher programs usability and utility. The GUI design and layout itself changed a few times over development, as well as the functionality and usage of GUI elements. \\
+This aim was achieved quite early on, however over the course of development, there were additional requirements introduced that improved the searcher programs usability and utility. The GUI design and layout itself changed multiple times over the development process, as well as the functionality and usage of GUI elements. \\
 
-We decided to make use of the external Python library PyQt5 to handle the GUI implementation, but all other libraries used were modules that were native to Python. The most important module we used beside PyQt5 was the SQLite3 library. This library enables the creation of Relational Databases using the Structured Query Language. This proved invaluable in storing the harvested metadata, and interacting with it through SQL queries, which enabled us to manipulate and interact with that data in many ways, opening a lot of possibilities regarding the Searcher program’s functionality. \\
+The front-end team decided to make use of the external Python library PyQt5 to handle the GUI implementation, but all other libraries used were modules that were native to Python. The most important module the team used besides PyQt5, was the SQLite3 library. This library enables the creation of Relational Databases using the Structured Query Language. This proved invaluable in storing the harvested metadata, especially interacting with it through SQL queries. This enabled the team to manipulate and interact with that data in many ways, opening a lot of possibilities regarding the searcher programs functionality. \\
 
-In the end we ended up meeting all critical and non-critical requirements gathered from our client over the course of development. The functionalities that the Searcher program provides for it’s users include:
+In the end the team ended up meeting all critical and non-critical requirements gathered from the client over the course of development. The functionalities that the searcher program provides for the client includes:
 
 \begin{itemize}
 \item Sorting/Searching of Metadata based on one or more fields
@@ -227,11 +227,11 @@ In the end we ended up meeting all critical and non-critical requirements gather
 \item Ease of Use
 \end{itemize}
 
-Although we are confident that this component has lived up to our client’s expectations, we realise that there is always room for improvement. Further development on the searcher program will likely be focused toward performance improvements, and possibly even additional functionality such as deletion and renaming of files, which could prove to be of great utility for its users. \\
+Although the team is confident that this component has met the client’s expectations, they realise that there is always room for improvement. Further development on the searcher program will likely be focused toward performance improvements, and possibly even additional functionality such as deletion and renaming of files, which could prove to be of great utility for the client. \\
 
-Although we focused a lot of resources towards performance/optimisation, the user should still expect that the searcher program may take some time to gather and collect metadata from large csv files. Once the GUI has launched however, all subsequent operations can be expected to perform without delay. The reason for this is that operations on a Relational Database using SQL tend to be quite efficient. \\
+Although the team dedicated a lot of resources towards performance and optimisation, the user should still expect that the searcher program may take some time to gather and collect metadata from large csv files. Once the GUI has launched however, all subsequent operations can be expected to perform without delay. The reason for this is that operations on a Relational Database using SQL tend to be quite efficient. \\
 
-As a team we are thoroughly satisfied with what we have developed regarding the searcher program, and we hope our client feels the same way. We are confident it has met all their needs and expectations and that it remains an important utility for them for some time to come.
+The team is thoroughly satisfied with what they have developed regarding the searcher program, and they hope the client feels the same way. They are confident that it has met all of the client's needs and expectations. The team hopes that it remains an important utility for the client for the foreseeable future.
 
 \end{adjustwidth}
 
