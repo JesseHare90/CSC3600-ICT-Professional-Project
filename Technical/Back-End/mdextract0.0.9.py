@@ -44,7 +44,7 @@ from pwd import getpwuid
 
 module_name = "File metadata harvester and searcher"
 team_name = "The USQ Learning Emporium"
-__version__ = "0.0.8"
+__version__ = "0.0.9"
 global_array = []
 
 # ======================
@@ -105,7 +105,7 @@ def csv_output(output_csv, global_array):
 def populate(input_file):
     hachoir_compatibile_files = ['bzip2','cab','gzip','mar','tar','zip','aiff','mpeg','real_audio','sun_next_snd','matroska','ogg','real_media','riff','bmp','gif','ico','jpeg','pcx','png','psd','targa','tiff','wmf','xcf','ole2','pcf','torrent','ttf','exe','asf','flv','mov']
     if os.path.isdir(input_file):
-        return 0    
+        return 0
     file_type = magic.from_file(input_file, mime=True)
     head, sep, file_ext = file_type.partition('/')
     # print(file_ext)    # used for testing
@@ -119,7 +119,7 @@ def populate(input_file):
             info[line[0].strip()] = line[1].strip()
             metadata.append(info)
         return metadata
-    
+
     elif file_ext == "pdf":
         fp = open(input_file, 'rb')
         pdf = PdfFileReader(fp)
@@ -127,7 +127,7 @@ def populate(input_file):
         # num_pages = pdf.getNumPages()
         # print(num_pages)
         return(info)
-    
+
     elif file_ext == "x-python" or "plain":
         process = subprocess.Popen(["stat", input_file], stdout=subprocess.PIPE, stderr=subprocess.STDOUT, universal_newlines=True)
         metadata = []
@@ -227,13 +227,13 @@ def main():
                                     continue
                                 if 'File' in tk:
                                     continue
-                                else:    
+                                else:
                                     kvStr = tk.replace("/","per")+":"+tV+","
-                                    
+
                                 fileStr = fileStr+kvStr
                 #strip trailing commas from the metadata string
                 fileStr = fileStr.rstrip(",")
-                #append to the records array, all metadata for the file as a string readable by the searcher program.           
+                #append to the records array, all metadata for the file as a string readable by the searcher program.
                 records.append(fileStr)
             #if filetype is a pdf, we will use the pypdf library to extract metadata from each pdf
             else:
@@ -257,12 +257,12 @@ def main():
                     fileStr = fileStr+"Type:"+str(fType)+",Size:"+str(size)+",Owner:"+owner+",Accessed:"+accTime+",Modified:"+modTime+",Title:"+str(title)+",Author:"+str(author)+",Pages:"+str(numPages)+",Creator:"+str(creator)+",Producer:"+str(producer)+",Subject:"+str(subject)
                     #append to records array
                     records.append(fileStr)
-                                     
-    
-    #write csv output to file using the csv_output function    
+
+
+    #write csv output to file using the csv_output function
     csv_output(args.output_file,records)
-                        
-        
+
+
 # Main control flow of program is started here, first function called is main
 if __name__ == '__main__':
     main()
