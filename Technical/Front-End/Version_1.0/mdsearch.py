@@ -60,6 +60,7 @@ def isValidPath(filename):
 
 def get_csv_data(filepath):
     csvFileName, fileExt = os.path.splitext(filepath)
+    #print("Loading, please wait...")
     if fileExt != '.csv':
         print('ERROR: expected a csv file, '+fileExt+" files are not usable as input")
         raise SystemExit
@@ -67,6 +68,7 @@ def get_csv_data(filepath):
     csv_data = open(file,"r")
     #use readlines() to build a list of the csv data, line by line
     csv_records = csv_data.readlines()
+    #print("loading, please wait")
     #split each line of csv_records into a list, using ',' as a delimeter
     records = []
     for i in csv_records:
@@ -74,9 +76,10 @@ def get_csv_data(filepath):
         records.append(record)
     #define a set to use to store each type of metadata attribute
     #initialise with first attribute, filepath (csv file format doesn't specify the key for the filepath)
-    attr_set = ["filepath"]
+    attr_set = ["Filepath"]
     #now populate the attribute set with all types of metadata attributes found in records
-    print(records)
+    #print(records)
+    print("Loading, please wait..")
     for i in records:
         temp = i
         for j in temp[1:]:
@@ -96,7 +99,7 @@ def get_csv_data(filepath):
                 
                 
                 if isValidPath(temprecord[0]):
-                    tempdict["filepath"] = temprecord[0]
+                    tempdict["Filepath"] = temprecord[0]
                     check = "false"
                 else:
                     # if the formatting of the csv file incorrect: expects a filepath as the first attribute on each line, terminates program
@@ -114,6 +117,7 @@ def get_csv_data(filepath):
     rows.insert(0,list(attr_set))
     #print(rows)
     csv_data.close()
+    #print("Loading complete!")
     return rows
 
 # =======================================================================================================
@@ -142,7 +146,7 @@ def create_connection(data):
     field_str = "CREATE TABLE filerecords ( "
     for i in fields:
         field = i
-        #size is a pretty universal attribute type, so we will make that field in the db store integers
+        #size is a pretty universal attribute type, so we will make that field in the db store integers, as well as Imageheight and width
         if field in ["Size","Imageheight","Imagewidth"]:
             field_str = field_str+field+" INTEGER(50),"
         else:
@@ -177,23 +181,8 @@ def create_connection(data):
                sql_insert_p2.append("NULL")      
         crsr.execute(sql_insert,sql_insert_p2)   
     connection.commit()
+    #print("Loading complete!")
     return connection
-
-# =======================================================================================================
-# create an SQLite3 database, and construct a schema based on the metadata extracted with the get_csv_data function
-#   then create a table in the database, of which isthen queried using a SELECT * statement
-#       This is the first function called by the GUI, which gives the initial display of file metadata
-# @param data - list of file metadata, output of the get_csv_data() function
-# @param connection - the in-memory database
-# @return - output of the "SELECT * FROM filerecords" query on the filerecords table
-# =======================================================================================================
-def display_all(data,connection):
-    fields = data[0]
-    crsr = connection.cursor()   
-    crsr.execute("SELECT * FROM filerecords")
-    output = crsr.fetchall()
-    output.insert(0,fields)
-    return output
 
 #========================================================================================================
 """
@@ -215,7 +204,10 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(1092, 896)
-        self.conn = create_connection(get_csv_data(sys.argv[1]))
+        self.data = get_csv_data(sys.argv[1])
+        #csvData = self.data
+        self.csvFields = self.data[0]
+        self.conn = create_connection(self.data)
         self.order = "ASC"
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
@@ -289,6 +281,7 @@ class Ui_MainWindow(object):
         self.tableWidget_2.move(10,125)
         MainWindow.addToolBar(QtCore.Qt.TopToolBarArea, self.mainToolBar)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
+        print("Loading complete!")
         
         
     # =======================================================================================================
@@ -312,8 +305,8 @@ class Ui_MainWindow(object):
     # @return - N/A
     # =======================================================================================================  
     def resetTable(self):
-        csv_data = get_csv_data(sys.argv[1])
-        test = display_all(csv_data,self.conn)
+        csv_data = self.data
+        test = self.display_all(self.conn)
         self.qStr = "blank"
         self.lineEdit_2.clear()
         #self.tableWidget_2.clearContents()
@@ -333,7 +326,7 @@ class Ui_MainWindow(object):
         header = self.tableWidget.horizontalHeaderItem(column).text()
         
         # if the cell double clicked contains the filepath, open the file
-        if header == "filepath":
+        if header == "Filepath":
             subprocess.call(["xdg-open",str(self.tableWidget.item(row, column).text())])
             # the line above opens the file on linux systems, the one below, windows. (requires os module)
             # to enable running on windows swap the two
@@ -350,7 +343,7 @@ class Ui_MainWindow(object):
         for i in tableData:
             data2 = {}
             # get all occuring metadata fields (types) that were harvested as list
-            fields = tableData[0]
+            fields = self.csvFields
             # get number of columns required to display harvested data in the table
             num_cols = len(fields)
             # create a list of dictionaries, where each dictionary has one of the attrib type as the key, with the values
@@ -368,7 +361,7 @@ class Ui_MainWindow(object):
                 data2[key] = col_vals    
             data1 = data2  
             # get the number of rows required by counting how many values occur for the key 'filepath' in the dictionary list
-            num_records = len(data1['filepath'])        
+            num_records = len(data1['Filepath'])        
             # set the row and column counts of the table    
             self.tableWidget.setRowCount(num_records)
             self.tableWidget.setColumnCount(num_cols)
@@ -391,6 +384,7 @@ class Ui_MainWindow(object):
             self.tableWidget.setHorizontalHeaderLabels(horHeaders)
             self.tableWidget.resizeColumnsToContents()
             
+            
     # =======================================================================================================
     # create and display the inital table of metadata shown on startup, using the searcher.get_csv_data() function
     #   to extract the metadata information from the csv file, then uses the searcher.display_all() function to use
@@ -400,8 +394,8 @@ class Ui_MainWindow(object):
     # @return N/A
     # =======================================================================================================
     def populateFirstTable(self, tableWidget):
-        csv_data = get_csv_data(sys.argv[1])
-        test = display_all(csv_data,self.conn)
+        csv_data = self.data
+        test = self.display_all(self.conn)
         self.createTable(test)
         
     # =======================================================================================================
@@ -410,8 +404,8 @@ class Ui_MainWindow(object):
     # @return - N/A
     # =======================================================================================================
     def populateFieldSelect(self,comboBox):
-        csv_data = get_csv_data(sys.argv[1])
-        test = display_all(csv_data,self.conn)
+        csv_data = self.data
+        test = self.display_all(self.conn)
         fieldVals = test[0]
         self.comboBox.addItems(fieldVals)
     
@@ -421,8 +415,8 @@ class Ui_MainWindow(object):
     # @return N/A
     # =======================================================================================================    
     def populateFieldSelect2(self,comboBox_2):
-        csv_data = get_csv_data(sys.argv[1])
-        test = display_all(csv_data,self.conn)
+        csv_data = self.data
+        test = self.display_all(self.conn)
         fieldVals = test[0]
         self.comboBox_2.addItems(fieldVals)
     
@@ -468,7 +462,7 @@ class Ui_MainWindow(object):
     # @return - N/A
     # =======================================================================================================
     def SortTable(self):
-        csv_data = get_csv_data(sys.argv[1])
+        csv_data = self.data
         sortField = str(self.getSortField(self.comboBox))
         sortOrder = str(self.checkSortType())
         test = self.display_sorted(csv_data,sortField,sortOrder,self.conn)
@@ -480,7 +474,7 @@ class Ui_MainWindow(object):
     # @return - N/A
     # =======================================================================================================  
     def SearchTable(self):
-        csv_data = get_csv_data(sys.argv[1])
+        csv_data = self.data
         searchField = str(self.getSearchField2(self.comboBox_2))
         searchString = str(self.getSearchString(self.lineEdit_2))
         sortOrder = str(self.checkSortType())
@@ -506,11 +500,11 @@ class Ui_MainWindow(object):
         colVal = self.tableWidget.horizontalHeaderItem(column).text()
         # Perform a sort against the field name, DESC or ASC alternating for each click (by default is ASCENDING)
         if self.order == "DESC":
-            csv_data = get_csv_data(sys.argv[1])
+            csv_data = self.data
             self.createTable(self.display_sorted(csv_data,colVal,"DESC",self.conn))
             self.order = "ASC" 
         else:
-            csv_data = get_csv_data(sys.argv[1])
+            csv_data = self.data
             self.createTable(self.display_sorted(csv_data,colVal,"ASC",self.conn))
             self.order = "DESC"
     
@@ -614,8 +608,8 @@ class Ui_MainWindow(object):
             self.qStr = queryStr
             crsr.execute(queryStr)
             output = crsr.fetchall()
-            data = get_csv_data(sys.argv[1])
-            fields = data[0]
+            data = self.data
+            fields = self.csvFields
             output.insert(0,fields)
             self.createTable(output)
             crsr.close()
@@ -628,8 +622,8 @@ class Ui_MainWindow(object):
                 self.qStr = queryStr
                 crsr.execute(queryStr)
                 output = crsr.fetchall()
-                data = get_csv_data(sys.argv[1])
-                fields = data[0]
+                data = self.data
+                fields = self.csvFields
                 output.insert(0,fields)
                 self.createTable(output)
                 crsr.close()
@@ -648,8 +642,8 @@ class Ui_MainWindow(object):
                 self.qStr = queryStr
                 crsr.execute(queryStr)
                 output = crsr.fetchall()
-                data = get_csv_data(sys.argv[1])
-                fields = data[0]
+                data = self.data
+                fields = self.csvFields
                 output.insert(0,fields)
                 self.createTable(output)
                 crsr.close()
@@ -664,7 +658,7 @@ class Ui_MainWindow(object):
     # @return - results of query against the table
     # =======================================================================================================
     def display_search(self,data, searchString, searchField, sortType, connection):
-        fields = data[0]
+        fields = self.csvFields
         crsr = connection.cursor()
         # perform a search on the db for any records whose specified fieldname contains one or more specified strings
         tempList = searchString.split(" ")
@@ -725,7 +719,7 @@ class Ui_MainWindow(object):
     # ======================================================================================================= 
     def display_sorted(self,data,field,sortType, connection):
     
-        fields = data[0]
+        fields = self.csvFields
         crsr = connection.cursor()
         # now gather the odered results of the query on the table
         if self.qStr != "blank":
@@ -737,7 +731,27 @@ class Ui_MainWindow(object):
         #insert at the beginning of the results the corresponding fields
         output.insert(0,fields)
         return output
-                               
+                        
+    # =======================================================================================================
+    # create an SQLite3 database, and construct a schema based on the metadata extracted with the get_csv_data function
+    #   then create a table in the database, of which isthen queried using a SELECT * statement
+    #       This is the first function called by the GUI, which gives the initial display of file metadata
+    # @param data - list of file metadata, output of the get_csv_data() function
+    # @param connection - the in-memory database
+    # @return - output of the "SELECT * FROM filerecords" query on the filerecords table
+    # =======================================================================================================
+    def display_all(self,connection):
+        fields = self.csvFields
+        #print(type(fields))
+        #fields = fields[0]
+        crsr = connection.cursor()   
+        crsr.execute("SELECT * FROM filerecords")
+        output = crsr.fetchall()
+        output.insert(0,fields)
+        return output
+
+    
+        
 # ===========================================================================================================
 # The main routine which sets up and displays the GUI of the program
 # ===========================================================================================================      
@@ -752,7 +766,23 @@ if __name__ == "__main__":
         print("Error: No such file'"+sys.argv[1]+"'")
         sys.exit()
     app = QtWidgets.QApplication(sys.argv)
+    #set the theme of the program to a dark-mode style
     app.setStyle("Fusion")
+    palette = QPalette()
+    palette.setColor(QPalette.Window, QColor(53, 53, 53))
+    palette.setColor(QPalette.WindowText, Qt.white)
+    palette.setColor(QPalette.Base, QColor(25, 25, 25))
+    palette.setColor(QPalette.AlternateBase, QColor(53, 53, 53))
+    palette.setColor(QPalette.ToolTipBase, Qt.white)
+    palette.setColor(QPalette.ToolTipText, Qt.black)
+    palette.setColor(QPalette.Text, Qt.white)
+    palette.setColor(QPalette.Button, QColor(53, 53, 53))
+    palette.setColor(QPalette.ButtonText, Qt.white)
+    palette.setColor(QPalette.BrightText, Qt.red)
+    palette.setColor(QPalette.Link, QColor(42, 130, 218))
+    palette.setColor(QPalette.Highlight, QColor(42, 130, 218))
+    palette.setColor(QPalette.HighlightedText, Qt.black)
+    app.setPalette(palette)
     MainWindow = QtWidgets.QMainWindow()
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
