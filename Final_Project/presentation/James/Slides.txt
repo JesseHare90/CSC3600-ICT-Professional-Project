@@ -1,0 +1,59 @@
+## Introduce Yourself
+
+Ryan has done this already the sick cunt, choose a photo you think looks best from these:
+
+[https://www.facebook.com/Jpm1990/photos_of?lst=553540168%3A553540168%3A1571793156](https://www.facebook.com/Jpm1990/photos_of?lst=553540168%3A553540168%3A1571793156)
+
+[https://www.instagram.com/james_mckeown6/?hl=en](https://www.instagram.com/james_mckeown6/?hl=en)
+
+I played a major role in the back-end development of the project, specifically the directory traversal, command-line argument parsing and CSV output functionalities.
+
+### Project Cost - Hardware (slide 1)
+
+This project was conducted remotely.
+
+Initial outlay of development tools included:
+
+[Untitled](https://www.notion.so/f6962982030a4852b579c7500a4d1544)
+
+Equipment is provided by the company.
+
+Virtualisation software used for multi-OS development.
+
+### Project Cost - Software (Slide 2)
+
+Communication and rapid development facilitated by Slack
+
+Client meetings hosted by Zoom video conference software
+
+Atom with its multi-programmer ability and multi-OS flexibility for code editor
+
+VirtualBox for testing on multiple operating systems
+
+Python for multi-OS interoperability and low system overhead and requirements
+
+### Time Costs (slide 3)
+
+The project has been estimated at 10 weeks for completion
+
+Five sprints consisting of:
+
+[Untitled](https://www.notion.so/e4543f858dd94354afc70d76173165e7)
+
+### Labour Cost (slide 4)
+
+Project split into two parts, back-end development and front-end development
+
+Team member costs are as follows:
+
+[](https://www.notion.so/5b6a56c61d58409fa8c6ea2b336e3e3f#4cb98afb7ebc4ad6af83dd1ec8aeebca)
+
+### Project Methodology (slide 5)
+
+Project utilises the AGILE methodology
+
+Main tasks developed from day three to seven
+
+Regular meetings with clients at end of each sprint to re-asses requirements
+
+Milestones hit at the end of each sprint for review

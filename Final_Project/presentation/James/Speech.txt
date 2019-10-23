@@ -1,0 +1,53 @@
+### Intro Slide
+
+Thanks Vincent for your insights on the analysis and implementation of our project, i'll further elaborate on our next section which involves project costings, findings and recommendations.
+
+As a quick introduction to myself, my name is James McKeown and I represent the team leader for the USQ Learning Emporium, and created the basis of the metadata harvester companion script for the back-end team. 
+
+### Hardware Slide
+
+I'd like to begin the costing analysis by looking into the hardware we required to complete the project.
+
+Each team member was assigned a portable laptop to enable development on the go, which was a requirement for our team built of remote coders. The cost-efficiency ratio of the Microsoft Surface Pro 6 with the ease of use of the Windows development platform made this a simple choice. Each unit came with ample RAM to facilitate the use of virtual environments and an OEM version of Windows included in the cost. 
+
+The team leader however chose to use a MacBook Air for administrative and project management purposes as the Apple product suite made for a simplified and comfortable experience.
+
+The costs of all hardware required for this project have been displayed in the table to the right. Each of the 5 members (including the leader) was assigned a Surface pro at the cost of $1349 to a total of $6745. The additional cost of the macbook air is justified by the need for a Macintosh for testing on this platform as the MacOS environment is built upon certain vendor hardware and a simulated virtual environment does not yield a smooth experience. 
+
+The combined total for all hardware comes to $8444.
+
+### Software Slide
+
+A best effort to reduce costs was made by the project lead by utilising the vast array of free software available to the public.
+
+For communication between team members a duality between the informal platform of a facebook messenger group was used to share ideas, but for formal applications slack provided an efficient medium to split groups into front and back end to minimise cross-conversations and confusion.
+
+Any meetings with the client was established through Zoom the free video conferencing software, this allowed us to not only voice and video chat, but most importantly screen share to show the client current progress and screens of how the project is coming along. This allowed the client to make criticisms on look and feel of the program during development to save waiting until end of project to make adjustments.
+
+Each developer has their own workflow that allows them to code efficiently, but we attempted to keep everything as uniform as possible. All back-end developers used a terminal emulator from a unix-like system to launch the python script, and development was facilitated by the use of a lightweight IDE called Atom. The front-end team decided to use Anaconda as an all-in-one package management tool and Spyder as the IDE which aided in creating a GUI rapidly.
+
+Python, a powerful and free scripting language was chosen for its abundance of open source GPL libraries. This allowed us to focus on core functionality and rapid development of code for our client within each sprint. Python is also packaged by default on all debian based distributions which our client chose to work with.
+
+And finally VirtualBox a free open source virtualisation software was used to test our scripts on multiple operating systems.
+
+### Time Slide
+
+The project will take a total of 12 weeks from start to finish with each sprint laid out as can be seen in the table shown.
+
+Sprint 1 will be used to gather initial information, perform initial coding bases, setup git repositories and create screen mock ups. Further sprints will consistent of python development and adding features week by week with testing conducted before client meetings.
+
+### Labor Slide
+
+As previously stated the teams were split into front and back ends. The table on screen displays the estimated total costs of staff working on a part-time basis with hourly wages reflecting seniority.
+
+The hourly rate was estimated by current industry standards for Python developers based upon information gathered from payscale and indeed.
+
+With the total cost of labour being $35780 and hardware as $8444 we get to a grand total of $44224 for a 12 week project, with no additional costs for software.
+
+### Methodology Slide
+
+We chose the AGILE methodology to incorporate short developments sprints headed by a SCRUM master. This allowed us to show working samples to the client on a semi-frequent basis, affording the client the opportunity to make amendments when necessary without impending future development costs.
+
+### Project Demonstration Slide
+
+Thank-you for your time, I will now hand off to Jesse who will give an in-depth product demonstration of both the Metadata Harvester python script and the Metadata Searcher pyQT GUI.
