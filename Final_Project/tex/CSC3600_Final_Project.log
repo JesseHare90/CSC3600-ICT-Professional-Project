@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2019.3.14)  21 OCT 2019 16:01
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2019.3.14)  24 OCT 2019 15:51
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -489,11 +489,16 @@ Underfull \hbox (badness 10000) in paragraph at lines 372--373
 
  []
 
-<task_distro.png, id=81, 505.89pt x 119.44624pt>
+<task_distro.png, id=81, 553.06625pt x 384.43625pt>
 File: task_distro.png Graphic file (type png)
 <use task_distro.png>
 Package pdftex.def Info: task_distro.png  used on input line 374.
-(pdftex.def)             Requested size: 359.1844pt x 84.8074pt.
+(pdftex.def)             Requested size: 387.14374pt x 269.10353pt.
+
+Overfull \hbox (27.14374pt too wide) in paragraph at lines 374--375
+[][] 
+ []
+
 
 Underfull \hbox (badness 10000) in paragraph at lines 374--375
 
@@ -509,27 +514,43 @@ Underfull \hbox (badness 10000) in paragraph at lines 384--385
 
  []
 
-[22] [23] [24] [25] (./CSC3600_Final_Project.aux) ) 
+[22] [23] [24]
+<overall.png, id=99, 1221.56375pt x 441.65pt>
+File: overall.png Graphic file (type png)
+<use overall.png>
+Package pdftex.def Info: overall.png  used on input line 422.
+(pdftex.def)             Requested size: 427.55373pt x 154.5798pt.
+
+Overfull \hbox (67.55373pt too wide) in paragraph at lines 421--423
+[] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 421--423
+
+ []
+
+[25 <./overall.png>] (./CSC3600_Final_Project.aux) ) 
 Here is how much of TeX's memory you used:
- 2640 strings out of 492649
- 35709 string characters out of 6129622
+ 2645 strings out of 492649
+ 35783 string characters out of 6129622
  103183 words of memory out of 5000000
- 6463 multiletter control sequences out of 15000+600000
+ 6467 multiletter control sequences out of 15000+600000
  11105 words of font info for 41 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  41i,7n,27p,1050b,281s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2018/tex
-mf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2018/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2018/texmf
--dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2018/texmf-d
-ist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2018/texmf-dis
-t/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2018/texmf-dist
-/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2018/texmf-dist/
-fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on CSC3600_Final_Project.pdf (26 pages, 629701 bytes).
+</usr/local/texlive/2018/te
+xmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2018/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2018/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2018/texmf-
+dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2018/texmf-di
+st/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2018/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2018/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmti12.pfb>
+Output written on CSC3600_Final_Project.pdf (26 pages, 1028196 bytes).
 PDF statistics:
- 126 PDF objects out of 1000 (max. 8388607)
+ 128 PDF objects out of 1000 (max. 8388607)
  81 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 26 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 31 words of extra memory for PDF output out of 10000 (max. 10000000)
 
