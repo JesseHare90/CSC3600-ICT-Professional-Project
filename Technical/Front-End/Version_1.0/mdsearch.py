@@ -60,7 +60,7 @@ def isValidPath(filename):
 
 def get_csv_data(filepath):
     csvFileName, fileExt = os.path.splitext(filepath)
-    #print("Loading, please wait...")
+    #if not a csv file, quit
     if fileExt != '.csv':
         print('ERROR: expected a csv file, '+fileExt+" files are not usable as input")
         raise SystemExit
@@ -68,7 +68,6 @@ def get_csv_data(filepath):
     csv_data = open(file,"r")
     #use readlines() to build a list of the csv data, line by line
     csv_records = csv_data.readlines()
-    #print("loading, please wait")
     #split each line of csv_records into a list, using ',' as a delimeter
     records = []
     for i in csv_records:
@@ -78,7 +77,7 @@ def get_csv_data(filepath):
     #initialise with first attribute, filepath (csv file format doesn't specify the key for the filepath)
     attr_set = ["Filepath"]
     #now populate the attribute set with all types of metadata attributes found in records
-    #print(records)
+    #let user know via cli that the script has begun to load the GUI
     print("Loading, please wait..")
     for i in records:
         temp = i
@@ -96,8 +95,6 @@ def get_csv_data(filepath):
         for j in temprecord:
             if (check == "true"):
                 #the first value for each line of csv should be a filepath on it's own, if a valid path, pair with the key 'filepath' for that record
-                
-                
                 if isValidPath(temprecord[0]):
                     tempdict["Filepath"] = temprecord[0]
                     check = "false"
@@ -108,16 +105,13 @@ def get_csv_data(filepath):
                 
             else:
                 #split key values at ':'
-                #print(j)
                 kv = j.split(":")
                 tempdict[kv[0]] = kv[1]
         rows.append(tempdict)
         check = "true"
     # insert before file records the list of all unique attribute types found in csv file
     rows.insert(0,list(attr_set))
-    #print(rows)
     csv_data.close()
-    #print("Loading complete!")
     return rows
 
 # =======================================================================================================
@@ -137,7 +131,6 @@ def create_connection(data):
         else:
             fields.append(i.replace(" ",""))
         
-    #print(fields)
     for index, x in enumerate(data):
         temp = data[index]
         if (index > 0):
@@ -153,7 +146,6 @@ def create_connection(data):
            field_str = field_str+field+" VARCHAR(50)," 
     field_str = field_str[:-1]
     field_str = field_str+");" 
-    #print(field_str)
     crsr.execute(field_str)
     #create an insert statement for the sql database
     #get first part of the insert query
@@ -181,7 +173,6 @@ def create_connection(data):
                sql_insert_p2.append("NULL")      
         crsr.execute(sql_insert,sql_insert_p2)   
     connection.commit()
-    #print("Loading complete!")
     return connection
 
 #========================================================================================================
@@ -205,7 +196,6 @@ class Ui_MainWindow(object):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(1092, 896)
         self.data = get_csv_data(sys.argv[1])
-        #csvData = self.data
         self.csvFields = self.data[0]
         self.conn = create_connection(self.data)
         self.order = "ASC"
@@ -281,6 +271,7 @@ class Ui_MainWindow(object):
         self.tableWidget_2.move(10,125)
         MainWindow.addToolBar(QtCore.Qt.TopToolBarArea, self.mainToolBar)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
+        #let user know via CLI that loading is complete and GUI will show immediately
         print("Loading complete!")
         
         
@@ -309,7 +300,6 @@ class Ui_MainWindow(object):
         test = self.display_all(self.conn)
         self.qStr = "blank"
         self.lineEdit_2.clear()
-        #self.tableWidget_2.clearContents()
         self.createTable(test)
         
     # =======================================================================================================
@@ -742,8 +732,6 @@ class Ui_MainWindow(object):
     # =======================================================================================================
     def display_all(self,connection):
         fields = self.csvFields
-        #print(type(fields))
-        #fields = fields[0]
         crsr = connection.cursor()   
         crsr.execute("SELECT * FROM filerecords")
         output = crsr.fetchall()
