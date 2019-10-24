@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2019.3.14)  24 OCT 2019 20:21
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2019.3.14)  24 OCT 2019 21:58
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -530,6 +530,18 @@ Underfull \hbox (badness 10000) in paragraph at lines 421--423
 
  []
 
+
+Overfull \hbox (112.28003pt too wide) in paragraph at lines 424--426
+\OT1/cmr/m/n/10.95 https://github.com/JesseHare90/CSC3600-ICT-Professional-Proj
+ect/tree/master/Technical/Back-
+ []
+
+
+Overfull \hbox (114.74376pt too wide) in paragraph at lines 427--429
+\OT1/cmr/m/n/10.95 https://github.com/JesseHare90/CSC3600-ICT-Professional-Proj
+ect/tree/master/Technical/Front-
+ []
+
 [25 <./overall.png>] (./CSC3600_Final_Project.aux) ) 
 Here is how much of TeX's memory you used:
  2645 strings out of 492649
@@ -547,7 +559,7 @@ dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2018/texmf-di
 st/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2018/texmf-dis
 t/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2018/texmf-dist
 /fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on CSC3600_Final_Project.pdf (26 pages, 1028205 bytes).
+Output written on CSC3600_Final_Project.pdf (26 pages, 1028334 bytes).
 PDF statistics:
  128 PDF objects out of 1000 (max. 8388607)
  81 compressed objects within 1 object stream
